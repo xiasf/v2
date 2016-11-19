@@ -1,0 +1,74 @@
+<link href="__PUBLIC__/wap/Home/User/css/index.css" type="text/css" rel="stylesheet" />
+
+<script>
+	var login_url = '{:U("login")}';
+</script>
+
+<div id="main" class="main_warp">
+
+	<section class="profile-info-block ng-scope">
+		<div class="info-box">
+			<img class="duser-avatar ng-scope" width="48" height="48" src="__PUBLIC__/{$user_info.avatar}" onerror="this.src = '__PUBLIC__/images/avatar/taobao_null.jpg'"><span class="icon-arrow-right"></span>
+			<div class="info-name">
+				<p class="ng-binding ng-scope">
+					{$user_info.nickname}
+				</p>
+				<p>
+					<span class="icon-mobile ng-scope"></span><span class="ng-binding ng-scope">{$user_info.mobile}</span>
+				</p>
+			</div>
+		</div>
+		<div class="info-data">
+			<div class="data-item">
+				<p class="text warning ng-scope">
+					<span style="max-width: 70%" class="ng-isolate-scope">
+					<div style="width: 100%; height: 100%; padding: 0px; margin: 0px; border: 0px;">
+						<span style="font-size: 26px;">0.00</span>
+					</div>
+					</span>
+				</p>
+				<p>
+					余额
+				</p>
+			</div>
+			<div class="data-item" goback="/profile/hongbao">
+				<p class="text error ng-scope">
+					<span style="max-width: 70%" class="ng-isolate-scope">
+					<div style="width: 100%; height: 100%; padding: 0px; margin: 0px; border: 0px;">
+						<span style="font-size: 26px;">0</span>
+					</div>
+					</span>
+				</p>
+				<p class="ng-binding">
+					红包
+				</p>
+			</div>
+			<div class="data-item">
+				<p class="text success ng-scope">
+					<span style="max-width: 70%" class="ng-isolate-scope">
+					<div style="width: 100%; height: 100%; padding: 0px; margin: 0px; border: 0px;">
+						<span style="font-size: 26px;">0</span>
+					</div>
+					</span>
+				</p>
+				<p>
+					积分
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="trade-block profile-base-block ng-scope">
+	   <a class="tblock-title mock-title" href=""><span class="icon-order"></span>我的订单<span class="icon-arrow-right"></span></a>
+	   <a class="tblock-title mock-title" href=""><span class="icon-point"></span>积分商城<span class="icon-arrow-right"></span></a>
+	   <a class="tblock-title mock-title" href="" target="_self"><span class="icon-profile-vip"></span>会员卡<span class="icon-arrow-right"></span></a>
+	</section>
+
+	<section class="trade-block profile-base-block ng-scope">
+	   <a class="tblock-title mock-title" href=""><span class="icon-profile-service"></span>服务中心<span class="icon-arrow-right"></span></a> 
+	   <a class="tblock-title mock-title" href="" target="_self"><span class="icon-logo"></span>关于我们<span class="icon-arrow-right"></span></a>
+	</section>
+
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/index.js"></script>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link rel="icon" href="__STATIC_2/images/favcoin.png" type="image/x-icon" />
+<script src="__STATIC_1/js/cookie.js?t=20141030071450"></script>
+<script src="__STATIC_1/js/m.js?t=20141030071450"></script>
+<link href="__STATIC_4/css/can_img.css?t=20141030071450" type="text/css" rel="stylesheet" />
+<link href="__STATIC_4/css/checkout.css?t=20141030071450" type="text/css" rel="stylesheet" />
+<script src="__STATIC_4/js/5el_u.js?t=20141030071450"></script>
+<script src="__STATIC_1/js/iscroll.js?t=20141030071450"></script>
+<script src="__STATIC_4/js/5el_nav.js?t=20141030071450"></script>
+<link href="__STATIC_4/css/remindorder.css?t=20141030071450" type="text/css" rel="stylesheet" />
+<title><?=$title?></title>
+<script>
+	// 回到顶部单击事件
+window.onload = function () {
+
+	var sf_h = parseInt(document.documentElement.clientHeight) - 40 +'px';
+	document.getElementById("sf_main").style.height = sf_h;
+	var Scroll = new iScroll('sf_main',{hScroll: true,vScroll: true,hScrollbar:false, vScrollbar:false});
+};
+
+// window ~
+window.onresize=function () {
+	var sf_h = parseInt(document.documentElement.clientHeight) - 40 +'px';
+	document.getElementById("sf_main").style.height = sf_h;
+};
+</script>
+</head>
+<body>
+<div id="m_z"></div>
+
+	<!-- start head -->
+	<div id="head">
+		<div id="head_wrap">
+			<a id="m_l" href="/v1/" onclick="if(document.referrer){window.location.href = document.referrer;return false;} else return true;"></a>
+			<span id="m_name">订单查询</span>
+			<div id="m_r"><div id="m_r_"></div></div>
+
+			<div class="clear"></div>
+
+			<div id="head_wrap_">
+				<!-- <span id="login_info">登陆&nbsp;&nbsp;|&nbsp;&nbsp;注册</span> -->
+				<span class="r"><a href="/v1/index.php">首页</a></span>
+				<span class="r"><a href="javascript:xx_ord()">点击解决无法下单</a></span>
+				<span class="r"><a href="/v1/index.php?a=remindorder">我的订单</a></span>
+				<span class="r"><a href="/v1/index.php?c=cart">购物车</a></span>
+				<span class="r"><a href="/v1/index.php?a=about">关于我们</a></span>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<script>
+			nav_old();
+			//login_info();
+		</script>
+	</div>
+	<!-- top head -->
+
+	<div id="sf_main">
+		<div id="main">
+			<span id='path_t' style="display: none;"><input placeholder="请输入手机号码查询" type="text" id="phone" value="{!$v!}" onkeydown="xiak()" /><input type="button" value="查询" id="ss" onclick="sbim()" /></span>
+			<div id="order"></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+<script>
+	var json_order = '{!$json_order!}';
+</script>
+<script src="__STATIC_4/js/remindorder.js?t=20141030071450"></script>
+
+<!--<footer>-->

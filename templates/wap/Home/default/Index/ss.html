@@ -1,0 +1,96 @@
+<div id="main">
+	<style>
+		.zc,.dl {margin: 10px auto;}
+		.zc input,.dl input {    display: block;
+    margin: 10px auto;
+    height: 30px;
+    padding: 5px;
+    width: 90%;}
+	</style>
+	<div class="zc">
+		<form name="zc_form" method="post" id="zc_form">
+      <input type="text" value="" name="username" placeholder="用户名" />
+      <input type="text" value="" name="email" placeholder="邮箱" />
+			<input type="text" value="" name="mobile" placeholder="手机号码" />
+			<input type="password" value="" name="password" placeholder="密码" />
+			<input type="button" class="subBtn" value="注册" />
+		</form>
+	</div>
+
+
+  <div class="dl">
+    <form name="dl_form" method="post" id="dl_form">
+      <input type="text" value="" name="mobile" placeholder="手机号码" />
+      <input type="password" value="" name="password" placeholder="密码" />
+      <input type="button" class="subBtn2" value="登录" />
+    </form>
+  </div>
+
+</div>
+<script>
+$(function(){
+
+    $('.subBtn2').click(function(){
+
+    if (!$('#dl_form input[name="mobile"]').val()) {
+      alert('手机号码必填！');
+      return;
+    }
+
+    if (!$('#dl_form input[name="password"]').val()) {
+      alert('密码必填！');
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "{:U('User/login')}",
+      data: $('#dl_form').serialize(),
+      success: function (result) {
+          if (result.status == 1) {
+            alert(result.info);
+            $('.mask_box').hide();
+          } else {
+            alert(result.info);
+          }
+      },
+      error: function(result) {
+          alert("error:"+result.responseText);
+       }
+  });
+}); 
+
+
+  $('.subBtn').click(function(){
+
+    if (!$('#zc_form input[name="mobile"]').val()) {
+      alert('手机号码必填！');
+      return;
+    }
+
+    if (!$('#zc_form input[name="password"]').val()) {
+      alert('密码必填！');
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      dataType: "json",
+      url: "{:U('User/register')}",
+      data: $('#zc_form').serialize(),
+      success: function (result) {
+          if (result.status == 1) {
+            alert(result.info);
+            $('.mask_box').hide();
+          } else {
+            alert(result.info);
+          }
+      },
+      error: function(result) {
+          alert("error:"+result.responseText);
+       }
+  });
+}); 
+});
+</script>

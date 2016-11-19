@@ -1,0 +1,96 @@
+/**
+ * 登陆并绑定页面样式
+ * update：2016-4-3 16:03:20
+ */
+
+ .bind-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.bind-wrap {
+    padding: 25px 10px 45px;
+    font-size: 14px;
+}
+
+.title-login {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.imghead img {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.imghead .nickname {
+    color: #41E282;
+}
+
+.title {
+    line-height: 20px;
+    color: #848689;
+}
+
+input {
+    border: 0;
+    height: 3.4rem;
+    line-height: 2.8rem;
+    width: 100%;
+    font-family: '微软雅黑';
+}
+
+.input-container label {
+    display: block;
+    width: 3.5rem;
+    height: 3.4rem;
+    line-height: 4.4rem;
+    color: #fff;
+    background: #d7d7d7;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    outline: 0;
+}
+
+.txt-wrap {
+    border: 1px solid #d7d7d7;
+    padding: 0 10px 0 4.4rem;
+    background: #fff;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+
+.err-msg, .txt-wrap {
+    margin-bottom: 15px;
+}
+
+.btn {
+    -webkit-border-radius: 4px;
+        background-color: #E83A57;
+    color: #fff;
+    background: linear-gradient(to bottom,#FF6C85 0,#E83A57 100%);
+    margin: 0 auto;
+    padding: 0 10px;
+    text-align: center;
+    display: block;
+}
+
+.b-btn {
+    font-size: 14px;
+    line-height: 40px;
+}
+
+.tip {
+    margin-top: 15px;
+    color: #848689;
+    font-size: 12px;
+    line-height: 30px;
+    display: inline-block;
+    margin-bottom: 10px;
+}

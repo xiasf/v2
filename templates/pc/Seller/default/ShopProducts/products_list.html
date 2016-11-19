@@ -1,0 +1,121 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>商店餐品列表<span class="label label-primary pull-right">{$products_count}</span></h5>
+                    <a href="{:U('shop_products/add')}" class="J_menuItem pull-right"><i class="fa fa-plus"></i>&nbsp;添加商店餐品</a>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-6 hide">
+                            <div data-toggle="buttons-checkbox" class="btn-group">
+                                <button class="btn btn-primary active" type="button" aria-pressed="true">全部(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="false">出售中(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true">已下架(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true">无库存(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true">库存告急(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true">回收站(12)</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 pull-right">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false">名称&nbsp;<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="form_basic.html#">地址</a>
+                                        </li>
+                                        <li><a href="form_basic.html#">负责人姓名</a>
+                                        </li>
+                                        <li><a href="form_basic.html#">手机号码</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="form_basic.html#">其它</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <input type="text" placeholder="搜索很简单^_^" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hr-line-dashed"></div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><input class="checkbox-inline i-checks" type="checkbox"></th>
+                                <th>名称</th>
+                                <th>价格</th>
+                                <th>库存</th>
+                                <th>分类</th>
+                                <th>排序</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name="products_list" item="products">
+								<tr>
+                                    <td>
+                                        <input class="checkbox-inline i-checks" type="checkbox" value="{$products.id}" name="id[]">
+                                    </td>
+                                    <td><img class="m-r" src="{:thumb($products['img'],50,50)}">{$products['name']}</td>
+                                    <td>{$products['price']}&nbsp;元/{$products['unit']}</td>
+                                    <td><span class="label label-danger">{$products['inventory']}{$products['unit']}</span></td>
+                                    <td title="{$products['category_id']}">{$products['category_name']}</td>
+                                    <td>{$products['sort']}</td>
+                                    <td><eq name="products['status']" value="1"><span class="label label-primary">出售中</span><else/><span class="label label-danger">已下架</span></eq></td>
+                                    <td>
+                                        <a href="{:U('update', array('id' => $products['id']))}" class="btn btn-white btn-sm"><i class="fa fa-edit"></i>&nbsp;修改</a>&nbsp;&nbsp;
+                                        <a href="javascript:void(0)" onclick="products_del({$products['id']})" class="btn btn-white btn-sm"><i class="fa fa-times-circle"></i>&nbsp;删除</a>
+                                    </td>
+                                </tr>
+							</foreach>
+
+                        </tbody>
+
+                        <tfoot>
+                        	<tr>
+                        		<td colspan="11"><div class="pull-right">{$page_show}</div></td>
+                        	</tr>
+                        </tfoot>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+    });
+
+    // 删除餐品
+    function products_del(id) {
+        layer.confirm("你确定要删除此商店吗？<br>注意，删除操作不可还原", function(){
+            layer.msg("正在删除……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("trur_delete")}', {id:id}, function(result){
+                if (result.status == 1) {
+                    layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    }, function(){
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(result.info, {time: 1000});
+                }
+            });
+        });
+    }
+
+</script>

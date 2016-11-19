@@ -1,0 +1,53 @@
+<link href="__PUBLIC__/wap/Home/Area/css/style.css?t=2016415022430" type="text/css" rel="stylesheet" />
+<script>
+	var check_url = '{:U("check")}';			// 检测分店入口
+</script>
+
+<div id="main" class="main_warp">
+
+	<form class="geo-search">
+		<input class="geo-search-input" type="search" name="word" placeholder="输入街道、楼宇、小区、道路、地址、标志性建筑物" required="">
+		<button class="ui-btn geo-search-btn" ng-click="getPlace()">搜索</button>
+	</form>
+
+	<div id="area_list">
+			
+		<div class="geo-search-empty ng-scope" ng-if="searchaddrlen === 0">选择准确的地址将有利于我们分店的分餐，提高送餐的效率</div>
+
+	</div>
+
+	<script id="tpl_area_list" type="text/html">
+    	{{each list as item}}
+			<div class="geo-search-result ng-scope">
+				<a class="gsr-detail" href="javascript:ck('{{item.location.lng}}', '{{item.location.lat}}', '{{item.name}}', '{{item.address}}')">
+					<p class="spot ng-binding">{{item.name}}</p>
+					<p class="address ng-binding">{{item.address}}</p>
+				</a>
+			</div>
+		{{/each}}
+	</script>
+
+	<div id="history_address_list">
+		<p id="get_location_btn" onclick="get_location()"><i class="fa fa-crosshairs"></i>定位</p>
+	</div>
+
+	<script id="tpl_history_address_list" type="text/html">
+		<p class="title">历史地址：</p><p id="history_clean" onclick="history_clean()"><i class="fa fa-trash-o"></i>清除</p><p id="get_location" onclick="get_location()"><i class="fa fa-crosshairs"></i>定位</p>
+    	{{each list as item index}}
+			<div class="geo-search-result ng-scope">
+				<a class="gsr-detail" href="javascript:ck('{{item.lng}}', '{{item.lat}}', '{{item.name}}', '{{item.address}}')">
+					<p class="spot ng-binding">{{item.name}}</p>
+					<p class="address ng-binding">{{item.address}}</p>
+					{{if index == 0}}
+					<p class="on_address">当前地址</p>
+					{{/if}}
+				</a>
+			</div>
+		{{/each}}
+	</script>
+
+</div>
+
+<script src="__PUBLIC__/wap/Home/Common/js/area.js?t=2016415022430"></script>
+<script src="__PUBLIC__/plugins/artTemplate/dist/template.js"></script>
+<script src="__PUBLIC__/wap/Home/Area/js/area.js?t=2016415022430"></script>

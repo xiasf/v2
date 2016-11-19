@@ -1,0 +1,91 @@
+<div class="wrapper wrapper-content">
+    <div class="row animated bounceInDown">
+        <div class="col-sm-12">
+            <div class="float-e-margins">
+                <div class="alert alert-info"><i class="fa fa-warning"></i>&nbsp;注意：请严格正确填写打印机信息，否则将导致无法正常打印订单。</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加打印机</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="printer_form" method="post" class="form-horizontal" action="">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">打印机名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="printname">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;如XXX店打印机</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">打印机终端号</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="machine_code">
+                                <span class="help-block m-t m-b-none alert alert-warning">请填写打印机背面终端号，填写错误打印机将无法工作。</span>
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;请准确填写打印机终端号</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">终端密匙</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="msign">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;必填</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">终端手机号</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="选填" name="mobilephone">
+                            </div>
+                            <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;可暂不填，方便充值与管理</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否开启</label>
+                            <div class="col-sm-5">
+                                <input type="checkbox" class="js-switch" name="status" value="1" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        new Switchery(document.querySelector(".js-switch"), {color: "#1AB394"});
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+        $("#printer_form").submit(function(){
+            // return true;
+            $.post("{:U('add')}", $(this).serialize(), function(result){
+                if (result.status == 1) {
+                    alert(result.info);
+                    window.location.href = result.url;
+                } else {
+                    alert(result.info);
+                }
+            });
+            return false;
+        });
+    });
+</script>

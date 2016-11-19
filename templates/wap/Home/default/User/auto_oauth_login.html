@@ -1,0 +1,24 @@
+<link href="__PUBLIC__/wap/Home/User/css/auto_oauth_login.css" type="text/css" rel="stylesheet" />
+
+<script>
+    var autoOauthLogin_url = '{:U("autoOauthLogin")}';
+</script>
+
+<div id="main" class="main_warp">
+    <div class="guide-wrap">
+        <div class="imghead">
+           <img src="__PUBLIC__/{$userInfo.avatar}" onerror="this.src = '__PUBLIC__/images/avatar/taobao_null.jpg'">
+            <span class="nickname">{$userInfo.nickname|default="昵称"}</span>
+        </div>
+        <div class="nickname-wrap">
+            <span class="desc">您的微信账号已绑定以上五味真火通行证账号</span>
+        </div>
+        <span class="title enter-title">是否直接登录?</span>
+        <a class="btn b-btn J_ping fast-reg" href="javascript:void(0)" id="loginBtn">确认</a>
+        <span class="title bind-title">我想使用其他账号登陆</span>
+        <a class="btn b-btn bind J_ping" href="{:U('login')}">使用其他账号登陆</a>
+        <p id="switchUrl" style="position: absolute; bottom: 10px; left: 0px; right: 0px; text-align: center; display: none;"><a href="">使用五味真火通行证账号直接登录</a></p>
+    </div>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/auto_oauth_login.js"></script>

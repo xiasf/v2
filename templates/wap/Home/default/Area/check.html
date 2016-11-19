@@ -1,0 +1,209 @@
+<link rel="stylesheet" type="text/css" href="__STATIC__/plugins/Swiper/dist/css/swiper.min.css" />
+<script type="text/javascript" src="__STATIC__/plugins/Swiper/dist/js/swiper.jquery.min.js"></script> 
+<link href="__PUBLIC__/wap/Home/Area/css/check.css?t=2016529222333" type="text/css" rel="stylesheet" />
+
+<script>
+	var address = '{$address}';
+	var lng = '{$lng}';
+	var lat = '{$lat}';
+	var area_url = '{:U("index")}';							// 切换位置
+	var so_lbs_url = '{:U("so_lbs")}';						// LBS 云检索接口
+</script>
+
+<!-- 检索遮罩层 -->
+<div id="branch_load" class="main_warp">
+	<div class="btn">
+		<div id="circle"></div>
+		<div id="circle1"></div>
+		<p id="wait">正在获取附近分店信息.</p>
+	</div>
+</div>
+
+<div class="main_warp hide">
+	<!-- 提示 -->
+	<div class="ng-scope note"></div>
+
+	<!-- 幻灯 -->
+<!-- 	<div class="bnrs-wrap">
+		<div id="bnrs" class="bnrs">
+			<a class="baitem" href="javascript:;" data-app="1">
+			  	<img src="__PUBLIC__/wap/Home/Area/images/mn.jpg" data-src-retina="http://xs01.meituan.net/waimai_i/img/bannertemp.ff933430.jpg" class="needsclick">
+			</a>
+		</div>
+        <div id="bnrs-indic-wrap" class="bnrs-indic-wrap">
+        </div>
+	</div> -->
+
+	<div class="bnrs-wrap">
+		<div id="bnrs" class="bnrs">
+			<div class="swiper-container swiper-container-horizontal" id="swiper-container">
+				<ul class="swiper-wrapper">
+				    <li class="swiper-slide swiper-slide-prev">
+				    	<a class="baitem" href="javascript:;" data-app="1">
+				    		<img src="__PUBLIC__/wap/Home/Area/images/1.jpg" data-src-retina="http://xs01.meituan.net/waimai_i/img/bannertemp.ff933430.jpg" class="needsclick">
+				    	</a>
+				    </li>
+				    <li class="swiper-slide swiper-slide-prev">
+				    	<a class="baitem" href="javascript:;" data-app="1">
+				    		<img src="__PUBLIC__/wap/Home/Area/images/2.jpg" data-src-retina="http://xs01.meituan.net/waimai_i/img/bannertemp.ff933430.jpg" class="needsclick">
+				    	</a>
+				    </li>
+				    <li class="swiper-slide swiper-slide-prev">
+				    	<a class="baitem" href="javascript:;" data-app="1">
+				    		<img src="__PUBLIC__/wap/Home/Area/images/3.jpg" data-src-retina="http://xs01.meituan.net/waimai_i/img/bannertemp.ff933430.jpg" class="needsclick">
+				    	</a>
+				    </li>
+				    <li class="swiper-slide swiper-slide-prev">
+				    	<a class="baitem" href="javascript:;" data-app="1">
+				    		<img src="__PUBLIC__/wap/Home/Area/images/mn.jpg" data-src-retina="http://xs01.meituan.net/waimai_i/img/bannertemp.ff933430.jpg" class="needsclick">
+				    	</a>
+				    </li>
+				</ul>
+				<div class="swiper-pagination"></div>
+			</div>
+		</div>
+        <div id="bnrs-indic-wrap" class="bnrs-indic-wrap"></div>
+	</div>
+
+	<!-- 分类 -->
+	<div class="j-rmd-types rmd-types">
+        <a href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/ms.png" alt="">
+            <span>美食</span>
+        </a>
+        <a class="no" href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/cs.png" alt="">
+            <span>超市</span>
+        </a>
+        <a class="no" href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/xgg.png" alt="">
+            <span>鲜果购</span>
+        </a>
+        <a class="no" href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/tdyp.png" alt="">
+            <span>甜点饮品</span>
+        </a>
+        <a href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/thg.png" alt="">
+            <span>土豪馆</span>
+        </a>
+        <a href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/mtzs.png" alt="">
+            <span>闪电专送</span>
+        </a>
+        <a href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/yx.png" alt="">
+            <span>夜宵</span>
+        </a>
+        <a class="no" href="#">
+        	<!-- <p class="num">12</p> -->
+            <img src="__PUBLIC__/wap/Home/Area/images/sysm.png" alt="">
+            <span>送药上门</span>
+        </a>
+    </div>
+
+    <!-- 筛选 -->
+    <div id="poifilter-bar" class="poifilter-bar">
+	    <nav id="poifilter-nav" class="poifilter-nav">
+	        <a class="j-nav-item nav-item nav-right-sep" href="javascript:;" data-itemname="category">全部品类</a>
+	        <a class="j-nav-item nav-item nav-right-sep" href="javascript:;" data-itemname="sort">综合排序</a>
+	        <a class="j-nav-item nav-item" href="javascript:;" data-itemname="filter">全部商家</a>
+	    </nav>
+	    <div id="poifilter-submenu-wrap" class="poifilter-submenu-wrap" style="display: none;">
+	        <div id="poifilter-submenu-category" class="j-poifilter-submenu poifilter-submenu poifilter-submenu-category" style="display: none">
+	            <div id="poifilter-submenu-main-wrap-category" class="poifilter-submenu-main-wrap">
+	                <div>
+					     <ul class="poifilter-submenu-main">
+					        <li data-key="category_type" data-value="0" data-secmenu="0" class="j-poifilter-submenu-item selected"><i style="background-image:url(http://p0.meituan.net/xianfu/dadb708a595ae7fe01d4a655b12cb411339.png)"></i><span class="submenu-text">全部品类</span><span class="submenu-count">169</span></li>
+					        <li data-key="category_type" data-value="10" data-secmenu="10" class="j-poifilter-submenu-item"><span class="submenu-text">快餐小吃</span><span class="submenu-count">69</span></li>
+	                    </ul>
+	                </div>
+	            </div>
+				<div class="poifilter-submenu-secondary-wrap">
+				     <div>    
+					    <ul id="poifilter-submenu-secondary-0" class="poifilter-submenu-secondary poifilter-submenu-secondary-show">
+					    </ul>
+					</div>
+				</div>
+	    	</div>
+
+	        <div id="poifilter-submenu-sort" class="j-poifilter-submenu poifilter-submenu poifilter-submenu-sort" style="display: none">
+	            <div id="poifilter-submenu-main-wrap-sort" class="poifilter-submenu-main-wrap">
+	                <div>
+	                    <ul class="poifilter-submenu-main">
+					        <li data-key="sort_type" data-value="0" class="j-poifilter-submenu-item selected"><i style="background-image:url(http://p1.meituan.net/xianfu/fe6cc9b622a134a61784c0d5de736998746.png)"></i><span class="submenu-text">综合排序</span></li>
+					        <li data-key="sort_type" data-value="1" class="j-poifilter-submenu-item"><i style="background-image:url(http://p1.meituan.net/xianfu/51635adbb08819d5586c3e1feb0946c62052.png)"></i><span class="submenu-text">销量最高</span></li>
+					        <li data-key="sort_type" data-value="2" class="j-poifilter-submenu-item"><i style="background-image:url(http://p1.meituan.net/xianfu/0c68412e3278cee753775e8d35ee16d31239.png)"></i><span class="submenu-text">速度最快</span></li>
+					        <li data-key="sort_type" data-value="3" class="j-poifilter-submenu-item"><i style="background-image:url(http://p1.meituan.net/xianfu/48a4cd16a03c3142415e786b51111b8e1451.png)"></i><span class="submenu-text">评分最高</span></li>
+					        <li data-key="sort_type" data-value="4" class="j-poifilter-submenu-item"><i style="background-image:url(http://p1.meituan.net/xianfu/4ef01d363318b4471401701d3d67c7251387.png)"></i><span class="submenu-text">起送价最低</span></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div id="poifilter-submenu-filter" class="j-poifilter-submenu poifilter-submenu poifilter-submenu-filter" style="display: none">
+	            <div id="poifilter-submenu-main-wrap-filter" class="poifilter-submenu-main-wrap">
+	                <div>
+	                    <ul class="poifilter-submenu-main">
+				            <li data-key="filter_type" data-value="0" class="j-poifilter-submenu-item selected"><span class="submenu-text">全部商家</span></li>
+				            <li data-key="filter_type" data-value="1014" class="j-poifilter-submenu-item">
+				                <i style="background-image:url(http://p1.meituan.net/xianfu/2cdedb516dd2c6cd5fe35ab92b9243de2048.png)"></i><span class="submenu-text">满返代金券</span></li>
+				            <li data-key="filter_type" data-value="-7" class="j-poifilter-submenu-item">
+				                <i style="background-image:url(http://p0.meituan.net/xianfu/51639e2e7a51c71d967acc44a060e3092048.png)"></i><span class="submenu-text">美团专送</span></li>
+				            <li data-key="filter_type" data-value="-3" class="j-poifilter-submenu-item">
+				                <i style="background-image:url(http://p1.meituan.net/xianfu/08872e9f704df2e8a66be78c7f8ae2412048.png)"></i><span class="submenu-text">免配送费</span></li>
+				            <li data-key="filter_type" data-value="-4" class="j-poifilter-submenu-item">
+				                <i style="background-image:url(http://p1.meituan.net/xianfu/4a62e5b9df4b0ecf5a2e98c95bff27782048.png)"></i><span class="submenu-text">0元起送</span></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+
+	        <div class="j-poifilter-submenu-btn poifilter-submenu-btn"></div>
+	    </div>
+	</div>
+
+	<!-- 餐厅列表 -->
+	<div id="branch_list"></div>
+</div>
+
+<!-- 餐厅列表模板 -->
+<script id="tpl_branch_list" type="text/html">
+	{{each list as item}}
+		<div class="geo-search-result ng-scope">
+			<a class="gsr-detail" href="{:U('Choose/index')}?shop_id={{item.shop_id}}">
+				<p class="shop_type_name">{{item.shop_type_name}}</p>
+				{{if item.shop_business_type == 1}}
+				<p class="shop_business_type business_type_1">官方自营
+				{{else}}
+				<p class="shop_business_type business_type_2">第三方合作
+				{{/if}}
+				</p>
+				<img class="lazy" data-original="{{item.store_bitmap}}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAaQAAAEEAQMAAABdntKYAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURff399XV1c3h0ucAAAK5SURBVGje7ZbBattAEIZnvSGb0pDNoQcfQtVDoVcfEwhen3ruI6Rv0N56CLFMoT62b5BXyBMkCobmUppHqEIgOVYm0MhU1nRGtpOSgldaaOlhvouF0afZlebfXQBBEARBEARBEARBEARBeMizIGsvyOoEWe+CrO0gaz/I6gZZB0GWC7L68T+0khALA6wWYNrc0gqzP/+NvnRCrK8eS2O+uF65H7d9s9wa3lurd4FrPX613Pp4b+m76LQeHS21zCEWi2s1+9ll69NfsOwJlg8sik5rbXO5hb9ZWd3ARXg7t3qV1a5lObxGlkHFldWtFTiH39nqU0OCJusFP8Gfk8rSyI0RUR/bWhbi+cxan2WGPrkzSR2LZlSSZeliTEJkfdlRiId0M7DlqJaL2co8kp5bXVhf29tOYa3NI8z9VsTWbm/lea+TgXoC8DQqwJcusmguLt14mbymGh+g55zPMlg6ruWyjbPkIgf1A34e7+Req+CXAP3MDAcjsj4r7ILnbRiDeZ9q6Wlq7eAbzeuKLQ9myFYCdkLWe0w2NVnerckOMUOqZW8qC9rqCoo6VopUy9wkhupCWw+z0m+N8JRrqctkg+YIW9rkB7k3k5c44FqaLDCnsKuPoYZ1g5pr6TP6Zi0F+1ursFP48z+zzDnvEVoV9KX0beK1SlNZJ7zat22xDqkeY+yzCjPlESKvwG+jo22VmrSfeS07pSzbwlI3XdCRRcU28XXvwqJyHTCjaomKYlv6rNxOEDQ/PI5GMa/WDgz6rbwEl1QryAlXJFHVsCYlVHf1CxfPNyLPYcJyrQKqeVDE4vmmZ/3WuICqh1yq7pYTv5XlD3YiLxRle5FDQyora3xGwdycNj/bUB8OkgCrpZtbUQm6+fmQGlWHnA4X56Bmb5E3SUEQBEEQBEEQBEEQBEEQBEEQ/kN+AWsUR6IkFUtLAAAAAElFTkSuQmCC" />
+				<p class="spot"><i class="fa fa-building-o"></i>{{item.title}}</p>
+				<p class="x"><i class="fa fa-map-marker"></i>距离{{item.distance}}m</p>
+				<p class="address"><i class="fa fa-paper-plane"></i>{{item.address}}</p>
+			</a>
+		</div>
+	{{/each}}
+</script>
+
+<link href="__PUBLIC__/plugins/BonBon/buttons.css" type="text/css" rel="stylesheet" />
+
+<!-- 按钮 -->
+<a data-icon="✰" href="{:U('Choose/index?t='.NOW_TIME)}" id="c" class="button pink serif skew glossy">
+	开始点餐
+</a>
+
+<script src="__PUBLIC__/wap/Home/Common/js/area.js"></script>
+<script src="__PUBLIC__/plugins/artTemplate/dist/template.js"></script>
+<script src="__PUBLIC__/plugins/lazyFade/lazyFade.js"></script>
+<script src="__PUBLIC__/plugins/jquery_lazyload/jquery.lazyload.min.js"></script>
+<script src="__PUBLIC__/wap/Home/Area/js/check.js"></script>

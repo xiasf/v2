@@ -1,0 +1,83 @@
+<link href="__PUBLIC__/wap/Home/Choose/css/style.css" type="text/css" rel="stylesheet" />
+<script>
+	var get_products_json_url = '{:U("Choose/get_products_json")}';	// 获取产品数据接口
+	var get_cart_json_url = '{:U("Choose/get_cart_json")}';			// 获取购物车数据接口
+	var cart_checkout_url = '{:U("Cart/checkout")}';			// 购物车接口
+</script>
+
+<div id="sf_main" class="main_warp">
+	<div id="main">
+		<div id="cat_list_wrap"><ul id="cat_list"></ul></div>
+		<div id="products_list_wrap"><div id="products_list"></div></div>
+
+		<div id="cart_wrap"><div id="cart"></div></div>
+	</div>
+</div>
+
+<script id="tpl_cat_list" type="text/html">
+	{{each cat_list as cat}}
+		<li class="geo-search-result ng-scope" data-cid="{{cat.id}}">
+			<a class="">{{cat.name}}</a>
+			<span class="">({{cat.item.length}})</span>
+		</li>
+	{{/each}}
+</script>
+
+<script id="tpl_products_list" type="text/html">
+	{{each products_list as cat}}
+    	<div class="products_info">
+	    	<div class="h_bg" style="background-image:url({{if cat.item[0]}}{{cat.item[0].img}}{{/if}})"></div>
+	    	<h3>{{cat.name}}<span class="">({{cat.item.length}})</span></h3>
+	    	<ul>
+		    	{{if cat.item.length}}
+			    	{{each cat.item as products_item}}
+					<li data-id="{{products_item.id}}">
+						<div class="l">
+							<img class="img" src="{{products_item.img}}">
+							<a class="name">{{products_item.name}}</a>
+							<!--<span class="sales">月售0{{products_item.unit}}</span>-->
+							<span class="sales">剩余{{products_item.inventory}}{{products_item.unit}}</span>
+							<span class="price">{{products_item.price}}</span>
+						</div>
+
+						<div class="r">
+							{{if products_item.inventory > 0}}
+							<input readonly="readonly" type="text" class="num hide" value="">
+							<button class="dec button button-3d button-caution button-circle button-small hide">
+								<i class="fa fa-minus"></i>
+							</button>
+							<button class="inc button button-3d button-primary button-circle button-small hide">
+								<i class="fa fa-plus"></i>
+							</button>
+							{{else}}
+							<span class="no_inventory">已售完</span>
+							{{/if}}
+						</div>
+					</li>
+					{{/each}}
+				{{/if}}
+			</ul>
+		</div>
+	{{/each}}
+</script>
+
+<script id="tpl_cart" type="text/html">
+	<i class="fa fa-shopping-cart fa-large"></i>&nbsp;
+	<span id="cart_num">{{cart.num}}</span>
+	<span id="cart_total">{{cart.total}}</span>
+	<a id="cart_botton" onclick="checkout(this)"></a>
+</script>
+
+<link href="__PUBLIC__/plugins/buttons/css/buttons.css" type="text/css" rel="stylesheet" />
+
+<script src="__PUBLIC__/wap/Home/Common/js/cart.js"></script>
+
+<script src="__PUBLIC__/js/number.js"></script>
+<script src="__PUBLIC__/wap/Home/Choose/js/choose.js"></script>
+<script>
+	// 显示加载层
+	var load = layer.open({
+        type: 2,
+        shadeClose: false,
+    });
+</script>

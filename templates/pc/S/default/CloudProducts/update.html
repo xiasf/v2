@@ -1,0 +1,185 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>编辑云餐品</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="products_form" method="post" class="form-horizontal" action="">
+                        <input type="hidden" name="id" value="" />
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属店铺</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="shop_id" disabled>
+                                    <option value="0">云店铺（云餐品由平台统一管理，无需为其分配店铺）</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属云分类</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="cloud_category_id">
+                                    <foreach name="cloud_products_category" item="products_category" key="shop_type">
+                                        <optgroup label="{:get_shop_type($shop_type)}">
+                                            <foreach name="products_category">
+                                            <option value="{$item['id']}">{$item['name']}</option>
+                                            </foreach>
+                                        </optgroup>
+                                    </foreach>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <input type="hidden" name="img" value="" />
+                            <label class="col-sm-2 control-label">图片</label>
+                            <div class="col-sm-6">
+                                <div class="uploader-list" id="fileList"></div>
+                                <div id="filePicker" class="filePicker"><i class="fa fa-cloud-upload"></i></div>
+                                <script type='text/html' id='tpl_pic'>
+                                    <div class="col-md-3 file-item thumbnail">
+                                        <img src="__ROOT__/{{picRoot.img}}" alt="{{picRoot.img}}">
+                                    </div>
+                                </script>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-5">
+                                <textarea type="textarea" class="form-control" name="describe"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">价格</label>
+                            <div class="col-sm-5">
+                                <div class="input-group"><span class="input-group-addon">¥</span>
+                                    <input type="text" class="form-control" name="price"> <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">每日库存</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="inventory"> <span class="input-group-addon">件</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">单位</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="unit">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="sort">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否上架</label>
+                            <div class="col-sm-5">
+                                <input type="checkbox" class="js-switch" name="status" value="1" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group row">
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">修改时间</span>
+                                            <input type="text" value="<if condition='$products_data["update_time"]'>{$products_data.update_time|date='Y-m-d H:i:s',###}</if>" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">创建时间</span>
+                                            <input type="text" value="{$products_data.create_time|date='Y-m-d H:i:s',###}" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/js/webuploader/uploader.js"></script>
+<script>
+    $(function(){
+
+        var formObj = new Form('products_form');
+        var products_data = {:json_encode($products_data)};
+        formObj.init(products_data);
+
+        if (products_data.img) {
+            var picHtml = template('tpl_pic', {'picRoot':{"img":products_data.img}});
+            $('#fileList').append(picHtml);
+        }
+
+        new Switchery(document.querySelector(".js-switch"), {color: "#1AB394"});
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+
+        $("#filePicker").uploader({
+            server:'{:U("img_upload")}',
+            filelist:"#fileList",
+            // isone: false,
+            uploaded:function(result){
+                $("input[name='img']").val(result.url.slice(1));
+            },
+        });
+
+        $("form[name=products_form]").submit(function(){
+            return true;
+            $.post("{:U('update')}", $(this).serialize(), function(result){
+                if (result.status == 1) {
+                    alert(result.info);
+                    window.location.href = result.url;
+                } else {
+                    alert(result.info);
+                }
+            });
+            return false;
+        });
+    });
+</script>

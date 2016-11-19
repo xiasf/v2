@@ -1,0 +1,435 @@
+<div class="wrapper wrapper-content animated bounceInRight">
+	    <div class="row">
+            <div class="col-sm-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="#tab-1" aria-expanded="true">基本信息</a></li>
+						<li class=""><a data-toggle="tab" href="#tab-2" aria-expanded="false">订单备注</a></li>
+						<li class=""><a data-toggle="tab" href="#tab-3" aria-expanded="false">订单日志</a></li>
+						<li class=""><a data-toggle="tab" href="#tab-4" aria-expanded="false">配送日志</a></li>
+						<li class=""><a data-toggle="tab" href="#tab-5" aria-expanded="false">订单打印记录</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                            	<div class="row">
+	                            	<div class="col-sm-6">
+					                    <div class="ibox float-e-margins">
+						                    <div class="ibox-title">
+						                    	<h5><i class="fa fa-file-text-o"></i>&nbsp;订单信息</h5>
+						                    </div>
+						                    <div class="ibox-content">
+												<table class="table table-bordered">
+													<tbody>
+														<tr>
+															<th>订单名称</th><td>{$order_data.order_name}</td>
+														</tr>
+														<tr>
+															<th>订单号</th><td>{$order_data.id}</td>
+														</tr>
+														<tr>
+															<th>店铺</th>
+															<td>
+																{$order_data.shop_name}({$order_data.shop_id})&nbsp;
+																<eq name="order_data.shop_business_type" value="1">
+						                                            <span class="label">平台</span>&nbsp;
+						                                            <else/>
+						                                            <span class="label">第三方</span>&nbsp;
+						                                        </eq>
+						                                        <span class="label">{:get_shop_type($order_data['shop_type'])}</span>
+															</td>
+														</tr>
+														<tr>
+															<th>分单</th>
+															<td>
+																<if condition='$order_data["final_shop_id"]'>
+																	{$order_data.final_shop.shop_name}({$order_data.final_shop_id})&nbsp;
+																	<eq name="order_data.final_shop.shop_business_type" value="1">
+							                                            <span class="label">平台</span>&nbsp;
+							                                            <else/>
+							                                            <span class="label">第三方</span>&nbsp;
+							                                        </eq>
+							                                        <span class="label">{:get_shop_type($order_data['final_shop']['shop_type'])}</span>
+																</if>
+															</td>
+														</tr>
+														<tr>
+															<th>当前状态</th><td>{:parse_order_status($order_data['status'])}</td>
+														</tr>
+														<tr>
+															<th title="当前/最后一次收到的反馈的打印状态">打印状态</th><td>{:parse_order_print_status($order_data['print_status'])}</td>
+														</tr>
+														<tr>
+															<th>支付方式</th>
+															<td>
+																<eq name="order_data.pay_type" value="1">餐到付款<else/>在线支付</eq>
+															</td>
+														</tr>
+														<tr>
+															<th>支付状态</th>
+															<td>
+																<eq name="order_data.pay_status" value="1">已支付<else/>待支付</eq>
+															</td>
+														</tr>
+														<tr>
+															<th>订单类型</th>
+															<td>
+																<eq name="order_data.shop_business_type" value="1">平台订单<else/>第三方订单</eq>
+															</td>
+														</tr>
+														<tr>
+															<th>下单时间</th><td>{$order_data.create_time|date='Y-m-d H:i:s',###}</td>
+														</tr>
+														<tr>
+															<th>打印统计</th>
+															<td>
+																<span class="label label-primary">已打印：{$order_data['print_statistical'][0]}张</span>&nbsp;&nbsp;
+																<span class="label label-warning">已推送：{$order_data['print_statistical'][1]}张</span>&nbsp;&nbsp;
+																<span class="label label-danger">打印失败：{$order_data['print_statistical'][2]}张</span>&nbsp;&nbsp;
+																<span class="label label-info">总计：{$order_data['print_statistical'][3]}张</span>
+															</td>
+														</tr>
+														<tr>
+															<th>用户备注</th><td>{$order_data.note|default='无备注'}</td>
+														</tr>
+														<tr>
+															<th>下单设备</th>
+															<td title="{$order_data.create_useragent}">
+																<eq name="order_data.create_terminal" value="1">PC<else/>WAP</eq>
+															</td>
+														</tr>
+														<tr>
+															<th>下单IP</th><td><a href="https://www.so.com/s?q={$order_data.create_ip|long2ip}" target="_blank">{$order_data.create_ip|long2ip}</a></td>
+														</tr>
+														<tr>
+															<th>打印时间</th>
+															<td>
+																<if condition='$order_data["print_time"]'>{$order_data.update_time|date='Y-m-d H:i:s',###}</if>
+															</td>
+														</tr>
+														<tr>
+															<th>支付时间</th>
+															<td>
+																<if condition='$order_data["pay_time"]'>{$order_data.update_time|date='Y-m-d H:i:s',###}</if>
+															</td>
+														</tr>
+														<tr>
+															<th>配送时间</th>
+															<td>
+																<if condition='$order_data["send_time"]'>{$order_data.update_time|date='Y-m-d H:i:s',###}</if>
+															</td>
+														</tr>
+														<tr>
+															<th>完成时间</th>
+															<td>
+																<if condition='$order_data["completion_time"]'>{$order_data.update_time|date='Y-m-d H:i:s',###}</if>
+															</td>
+														</tr>
+														<tr>
+															<th>最后更新</th>
+															<td>
+																<if condition='$order_data["update_time"]'>{$order_data.update_time|date='Y-m-d H:i:s',###}</if>
+															</td>
+														</tr>
+														<tr>
+															<th>用户ID</th><td>{$order_data.uid}</td>
+														</tr>
+													</tbody>
+												</table>
+						                    </div>
+						                </div>
+									</div>
+
+						            <div class="col-sm-6">
+						                <div class="ibox float-e-margins">
+						                    <div class="ibox-title">
+						                    	<h5><i class="fa fa-money"></i>&nbsp;订单金额明细</h5>
+						                    </div>
+						                    <div class="ibox-content">
+						                        <table class="table table-bordered">
+													<tbody>
+														<tr>
+															<th>商品总额</th><td>￥{$order_data.total}</td>
+														</tr>
+														<tr>
+															<th>打包费用</th><td>￥0</td>
+														</tr>
+														<tr>
+															<th>配送费用</th><td>￥0</td>
+														</tr>
+														<tr>
+															<th>订单总额</th><td>￥{$order_data.total}</td>
+														</tr>
+														<tr>
+															<th>钜惠满减</th><td>-2元</td>
+														</tr>
+														<tr>
+															<th>代金券抵扣</th><td>-3元</td>
+														</tr>
+														<tr>
+															<th>优惠总额</th><td>-5元</td>
+														</tr>
+														<tr>
+															<th>应付金额</th><td>￥{$order_data.total}</td>
+														</tr>
+													</tbody>
+												</table>
+						                    </div>
+						                </div>
+						            </div>
+								</div>
+
+								<div class="row">
+						            <div class="col-sm-6">
+						                <div class="ibox float-e-margins">
+						                    <div class="ibox-title">
+						                    	<h5><i class="fa fa-file-text-o"></i>&nbsp;订单清单</h5>
+						                    </div>
+						                    <div class="ibox-content">
+												<table class="table table-bordered">
+
+													<thead>
+														<tr>
+															<th>名称</th>
+															<th>数量</th>
+															<th>单位</th>
+															<th>单价</th>
+															<th>小结</th>
+														</tr>
+													</thead>
+
+													<tbody>
+														<foreach name="order_data.item">
+														<tr>
+															<td>
+																<img class="m-r" src="{$item.product_img}">
+																<a href="javascript:void(0);">{$item['product_name']}</a>
+															</td>
+															<td>{$item['product_num']}</td>
+															<td>{$item['product_unit']}</td>
+															<td>￥{$item['product_price']}</td>
+															<td>￥{$item['summary']}</td>
+														</tr>
+														</foreach>
+													</tbody>
+												</table>
+						                    </div>
+						                </div>
+						            </div>
+
+						            <div class="col-sm-6">
+						                <div class="ibox float-e-margins">
+						                    <div class="ibox-title">
+						                    	<h5><i class="fa fa-paper-plane"></i>&nbsp;收货人信息</h5>
+						                    </div>
+						                    <div class="ibox-content">
+						                        <table class="table table-bordered">
+													<tbody>
+														<tr>
+															<th>送达时间</th><td>{$order_data.delivery_time|default='未填写'}</td>
+														</tr>
+														<tr>
+															<th>姓名</th><td>{$order_data.user_name|default='未填写'}</td>
+														</tr>
+														<tr>
+															<th>性别</th><td>{$order_data.user_sex}</td>
+														</tr>
+														<tr>
+															<th>手机</th><td>{$order_data.mobile}</td>
+														</tr>
+														<tr>
+															<th>地址</th><td>{$order_data.location}&nbsp;{$order_data.address}</td>
+														</tr>
+														<tr>
+															<th>标注</th><td>{$order_data.address_tag}</td>
+														</tr>
+														<tr>
+															<th>经纬度</th><td>{$order_data.lng},{$order_data.lat}</td>
+														</tr>
+													</tbody>
+												</table>
+						                    </div>
+						                </div>
+					                </div>
+					            </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+				                <div class="ibox float-e-margins">
+				                	<div class="ibox-title">
+				                    	<h5>订单备注&nbsp;<button type="button" onclick="add_order_note()" class="btn btn-white btn-sm m-l"><i class="fa fa-edit"></i>&nbsp;添加备注</button></h5>
+				                    </div>
+				                    <div class="ibox-content">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th><i class="fa fa-clock-o"></i>&nbsp;时间</th>
+													<th><i class="fa fa-user"></i>&nbsp;操作用户</th>
+													<th>备注</th>
+												</tr>
+											</thead>
+											<tbody id="order_note">
+												<foreach name="order_note">
+												<tr>
+													<td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+													<td>{$item['uid']}</td>
+													<td>{$item['note']}</td>
+												</tr>
+												</foreach>
+											</tbody>
+										</table>
+				                    </div>
+				                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-3" class="tab-pane">
+                            <div class="panel-body">
+				                <div class="ibox float-e-margins">
+				                	<div class="ibox-title">
+				                    	<h5>订单日志</h5>
+				                    </div>
+				                    <div class="ibox-content">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th><i class="fa fa-clock-o"></i>&nbsp;时间</th>
+													<th><i class="fa fa-user"></i>&nbsp;操作用户</th>
+													<th>内容</th>
+												</tr>
+											</thead>
+											<tbody id="order_log">
+												<foreach name="order_log">
+												<tr>
+													<td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+													<td>{$item.uid}</td>
+													<td>{$item.note}</td>
+												</tr>
+												</foreach>
+											</tbody>
+										</table>
+				                    </div>
+				                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-4" class="tab-pane">
+                            <div class="panel-body">
+				                <div class="ibox float-e-margins">
+				                	<div class="ibox-title">
+				                    	<h5>配送日志</h5>
+				                    </div>
+				                    <div class="ibox-content">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th><i class="fa fa-clock-o"></i>&nbsp;时间</th>
+													<th><i class="fa fa-user"></i>&nbsp;操作用户</th>
+													<th>内容</th>
+												</tr>
+											</thead>
+											<tbody id="order_log">
+												<foreach name="order_log">
+												<tr>
+													<td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+													<td>{$item.uid}</td>
+													<td>{$item.note}</td>
+												</tr>
+												</foreach>
+											</tbody>
+										</table>
+				                    </div>
+				                </div>
+                            </div>
+                        </div>
+
+                        <div id="tab-5" class="tab-pane">
+                            <div class="panel-body">
+				                <div class="ibox float-e-margins">
+				                	<div class="ibox-title">
+				                    	<h5>订单打印记录</h5>
+				                    </div>
+				                    <div class="ibox-content">
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<th><i class="fa fa-clock-o"></i>&nbsp;序号</th>
+													<th><i class="fa fa-clock-o"></i>&nbsp;创建时间</th>
+													<th><i class="fa fa-clock-o"></i>&nbsp;打印时间</th>
+													<th>状态</th>
+													<th>票据ID</th>
+												</tr>
+											</thead>
+											<tbody>
+												<foreach name="order_print_log">
+												<tr>
+													<td>{$item.serial}</td>
+													<td>{$item.create_time|date='Y-m-d H:i:s',###}</td>
+													<td><if condition='$item["print_time"]'>{$item.print_time|date='Y-m-d H:i:s',###}</if></td>
+													<td>
+														<if condition='$item["print_status"] eq 0'>
+															<span class="label label-warning">未打印（等待上报）</span>
+															<elseif condition='$item["print_status"] eq 1' />
+															<span class="label label-danger">打印失败</span>
+															<elseif condition='$item["print_status"] eq 2' />
+															<span class="label label-primary">打印成功</span>
+														</if>
+													</td>
+													<td>
+														<div class="alert alert-warning"><strong>{$item.paper_id}&nbsp;-&nbsp;【{$item.printname}({$item.printer_id})】-&nbsp;票据打印记录</strong>
+														<ul>
+															<foreach name="item.log" item="print_log">
+																<li>
+																	<code>{$print_log.create_time|date='Y-m-d H:i:s',###}</code>&nbsp;&nbsp;
+																	{$print_log['note']}
+																</li>
+															</foreach>
+														</ul>
+													</div>
+													</td>
+												</tr>
+												</foreach>
+											</tbody>
+										</table>
+				                    </div>
+				                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<script>
+
+	// 添加备注
+	function add_order_note() {
+	    top.layer.prompt({
+	        title: '添加备注',
+	        value: '我要备注点啥呢',
+	        formType: 2,
+	        btn: ['保存', '取消'],
+	    }, function(text, index) {
+	        top.layer.title('正在保存……',index);
+	        $.post('{:U("add_order_note")}', {order_id:{$order_data.id}, note:text}, function(result){
+	            if (result.status == 1) {
+	                // layer.close(index);
+	                top.layer.msg("保存成功",{time:1000});
+	                var str = "<tr>
+						<td>"+ new Date(parseInt(result.info.create_time) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ") +"</td>
+						<td>"+result.info.uid+"</td>
+						<td>"+result.info.note+"</td>
+					</tr>";
+					$("#order_note").prepend(str);
+	            } else {
+	                top.layer.msg(result.info, {time: 1000});
+	            }
+	        }, 'json');
+	    });
+	}
+</script>

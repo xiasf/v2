@@ -1,0 +1,474 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>订单列表<span class="label label-primary pull-right">{$order_count}</span></h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-3 hide">
+                            <div data-toggle="buttons-checkbox" class="btn-group">
+                                <button class="btn btn-primary active" type="button" aria-pressed="true"><i class="fa fa-clock-o"></i>&nbsp;待确认(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="false"><i class="fa fa-check"></i>&nbsp;已确认(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true"><i class="fa fa-bicycle"></i>&nbsp;配送中(12)</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 pull-right">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false">名称&nbsp;<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="form_basic.html#">地址</a>
+                                            </li>
+                                            <li><a href="form_basic.html#">姓名</a>
+                                            </li>
+                                            <li><a href="form_basic.html#">手机号码</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="form_basic.html#">其它</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <input type="text" placeholder="搜索很简单^_^" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;搜索</button></span>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="hr-line-dashed"></div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><input class="checkbox-inline i-checks" type="checkbox"></th>
+                                <th>ID</th>
+                                <th><i class="fa fa-file-text"></i>&nbsp;订单信息</th>
+                                <th><i class="fa fa-rmb"></i>&nbsp;金额</th>
+                                <th><i class="fa fa-university"></i>&nbsp;商店</th>
+                                <th><i class="fa fa-circle-o"></i>&nbsp;订单状态</th>
+                                <th><i class="fa fa-money"></i>&nbsp;支付</th>
+                                <th width="224px"><i class="fa fa-mouse-pointer"></i>&nbsp;常用操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name="order_list" item="order">
+								<tr>
+                                    <td>
+                                        <input class="checkbox-inline i-checks" type="checkbox" value="{$order.id}" name="id[]">
+                                    </td>
+                                    <td>
+                                        <span class="badge">{$order.id}</span>
+                                    </td>
+                                    <!-- 点击查看地图 -->
+                                    <td>
+                                        <p class="text-danger">
+                                        <i class="fa fa-map-marker"></i>&nbsp;<a class="text-danger" id="order-{$order.id}-address" href="javascript:void(0);" data-lng="{$order.lng}" data-lat="{$order.lat}" onclick="show_address({$order.id})"><strong>{$order.location}&nbsp;{$order.address}&nbsp;({$order.address_tag})</strong></a>
+                                        </p>
+                                        <p class="text-success">
+                                        <i class="fa fa-user"></i>&nbsp;{$order.user_name|default='未填写'}
+                                        <if condition="$order['user_sex'] eq 1">(男)<elseif condition="$order['user_sex'] eq 2" />(女)</if>
+                                        </p>
+                                        <p class="text-info"><i class="fa fa-mobile-phone"></i>&nbsp;{$order.mobile}</p>
+                                        <p class="text-muted">
+                                        <i class="fa fa-clock-o"></i>&nbsp;<code title="{$order.create_time|date='Y-m-d H:i:s',###}">{$order.create_time|timeDiff='10'}</code>
+                                        <if condition="$order['delivery_time']">&nbsp;<code>{$order['delivery_time']}</code></if>
+                                        </p>
+                                        <span class="text-warning"><i class="fa fa-file-text-o"></i>&nbsp;{$order.order_name}</span>
+                                    </td>
+                                    <!-- 点击查看详细列表清单 -->
+                                    <td><a href="javascript:void(0);" onclick="show_item(this)" class="text-danger" data-item='{$order.item|json_encode}'><strong>{$order.total}元</strong></a></td>
+                                    <td id="order-{$order.id}-shop" data-shop-id="{$order.shop_id}" data-shop-type="{$order.shop_type}" data-shop-lng="{$order.shop_lng}" data-shop-lat="{$order.shop_lat}" data-shop-address="{$order.shop_address}" data-shop-address-reference="{$order.shop_address_reference}" <if condition="$order.final_shop_id neq 0">data-final-shop-id="{$order.final_shop.id}" data-final-shop-name="{$order.final_shop.shop_name}" data-final-shop-lng="{$order.final_shop.lng}" data-final-shop-lat="{$order.final_shop.lat}" data-final-shop-address="{$order.final_shop.address}" data-final-shop-address-reference="{$order.final_shop.address_reference}"</if>>
+                                        <p>
+                                        {$order.shop_name}
+                                        </p>
+                                        <p>
+                                        <eq name="order.shop_business_type" value="1">
+                                            <span class="label">平台</span>&nbsp;
+                                            <else/>
+                                            <span class="label">第三方</span>&nbsp;
+                                        </eq>
+                                        <span class="label">{:get_shop_type($order['shop_type'])}</span>
+                                        </p>
+                                        <if condition="$order.final_shop_id neq 0">
+                                           <span class="label label-success"><i class="fa fa-exchange"></i>&nbsp;已分单</span>
+                                        </if>
+                                    </td>
+                                    <td>
+                                        <p><span class="label label-danger">{:parse_order_status($order['status'])}</span></p>
+                                        <span class="label label-info m-t"><i class="fa fa-print"></i>&nbsp;{:parse_order_print_status($order['print_status'])}</span>
+                                    </td>
+                                    <td>
+                                        <p>
+                                        <eq name="order.pay_type" value="1">
+                                            <span class="label label-warning">餐到付款</span>
+                                            <else/>
+                                            <span class="label label-primary">在线支付</span>
+                                        </eq>
+                                        </p>
+                                        <eq name="order.pay_status" value="1">
+                                            <span class="label label-primary"><i class="fa fa-check"></i>&nbsp;已支付</span>
+                                            <else/>
+                                            <span class="label"><i class="fa fa-clock-o"></i>&nbsp;待支付</span>
+                                        </eq>
+                                    </td>
+                                    <td>
+                                        <a href="{:U('order/order_detail', array('id' => $order['id']))}" class="btn btn-white btn-sm"><i class="fa fa-eye"></i>&nbsp;查看</a>&nbsp;&nbsp;
+                                        
+                                        <!-- 只能分单一次；平台才可分单；支付成功才可以分单 -->
+                                        <if condition="$order['final_shop_id'] eq 0 && $order['shop_business_type'] eq 1">
+                                            <if condition="$order['pay_type'] eq 2 && $order['pay_status'] neq 1">
+                                                <button type="button" onclick="final_shop_order({$order.id})" class="btn btn-white btn-sm" disabled="disabled"><i class="fa fa-exchange"></i>&nbsp;分单</button>&nbsp;&nbsp;
+                                                <else/>
+                                            <button type="button" onclick="final_shop_order({$order.id})" class="btn btn-white btn-sm"><i class="fa fa-exchange"></i>&nbsp;分单</button>&nbsp;&nbsp;
+                                            </if>
+                                        <else/>
+                                            <button type="button" onclick="final_shop_order({$order.id})" class="btn btn-white btn-sm" disabled="disabled"><i class="fa fa-exchange"></i>&nbsp;分单</button>&nbsp;&nbsp;
+                                        </if>
+
+                                        <!-- 原始待确认的订单，且支付成功 -->
+                                        <if condition="($order['status'] eq 0 && ($order['pay_type'] eq 2 && $order['pay_status'] eq 1)) || ($order['status'] eq 0 && $order['pay_type'] eq 1)">
+                                            <button type="button" onclick="sure_order({$order.id})" class="btn btn-white btn-sm"><i class="fa fa-check"></i>&nbsp;确认</button>&nbsp;&nbsp;
+                                        <else/>
+                                            <button type="button" onclick="sure_order({$order.id})" class="btn btn-white btn-sm" disabled="disabled"><i class="fa fa-check"></i>&nbsp;确认</button>&nbsp;&nbsp;
+                                        </if>
+
+                                        <!-- 手动打印：支付成功的订单 -->
+                                        <if condition="$order['pay_type'] eq 2 && $order['pay_status'] neq 1">
+                                        <button type="button" onclick="send_print_order({$order.id})" class="btn btn-white btn-sm" disabled="disabled"><i class="fa fa-print"></i>&nbsp;打印</button>&nbsp;&nbsp;
+                                        <else/>
+                                        <button type="button" onclick="send_print_order({$order.id})" class="btn btn-white btn-sm"><i class="fa fa-print"></i>&nbsp;打印</button>&nbsp;&nbsp;
+                                        </if>
+
+                                        <!-- 代配送状态的订单 -->
+                                        <if condition="$order['status'] eq 5">
+                                            <button type="button" onclick="order_del({$order.id})" class="btn btn-white btn-sm"><i class="fa fa-bicycle"></i>&nbsp;配送</button>&nbsp;&nbsp;
+                                        <else/>
+                                            <button type="button" onclick="order_del({$order.id})" class="btn btn-white btn-sm" disabled="disabled"><i class="fa fa-bicycle"></i>&nbsp;配送</button>&nbsp;&nbsp;
+                                        </if>
+
+                                        <!-- 只有待确认的原始订单和已经确认的订单才能进行取消操作！；没有支付的订单 -->
+                                        <if condition="($order['status'] elt 1 && ($order['pay_type'] eq 2 && $order['pay_status'] neq 1)) || ($order['status'] elt 1 && $order['pay_type'] eq 1)">
+                                            <button type="button" onclick="cancel_order({$order.id})" class="btn btn-white btn-sm"><i class="fa fa-close"></i>&nbsp;取消</button>&nbsp;&nbsp;
+                                            <else/>
+                                            <button type="button" onclick="cancel_order({$order.id})" class="btn btn-white btn-sm" disabled="disabled"><i class="fa fa-close"></i>&nbsp;取消</button>&nbsp;&nbsp;
+                                        </if>
+                                    </td>
+                                </tr>
+							</foreach>
+                        </tbody>
+                        <tfoot>
+                        	<tr>
+                        		<td colspan="13"><div class="pull-right">{$page_show}</div></td>
+                        	</tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    #milkMap{
+        height:450px;width:800px;
+    }
+</style>
+
+
+<script src="http://api.map.baidu.com/api?v=2.0&ak=9Go7FByT2xPEH5VcPKMiZWoY"></script>
+
+<script id="tpl_order_item" type="text/html">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>名称</th>
+                <th>数量</th>
+                <th>单位</th>
+                <th>单价</th>
+                <th>小结</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{each list as item}}
+            <tr>
+                <td><img class="m-r" src="{{item.product_img}}"><a href="javascript:void(0);" data-id="{{item.product_id}}">{{item.product_name}}</a></td>
+                <td>{{item.product_num}}</td>
+                <td>{{item.product_unit}}</td>
+                <td>￥{{item.product_price}}</td>
+                <td>￥{{item.summary}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</script>
+
+<script>
+    $(function(){
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+    });
+
+    // 显示订单地图
+    function show_address(id) {
+        layer.open({
+            id: 1,
+            type: 1,
+            title: '订单地图',
+            content: '<div id="milkMap"></div>',
+            area: '800',
+        });
+
+        // 初始化地图
+        var map = new BMap.Map("milkMap");
+        map.enableScrollWheelZoom();
+        // map.enableInertialDragging();
+        map.enableContinuousZoom();
+        map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT}));
+        
+        var address = $('#order-' + id + '-address'),
+            lng = address.data('lng'),
+            lat = address.data('lat');
+
+        var order_point = new BMap.Point(lng, lat);
+        map.centerAndZoom(order_point, 14);
+
+        // 创建订单标注
+        var order_Icon = new BMap.Icon("__PUBLIC__/images/map/order_marker.png", new BMap.Size(80,118));
+        var order_marker = new BMap.Marker(order_point, {icon:order_Icon});         // 创建订单标注  
+    　　map.addOverlay(order_marker);                                 // 将标注添加到地图中
+        order_marker.setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+        order_marker.addEventListener("click", function(e){
+            var order_infoWindow = new BMap.InfoWindow(address.parent().parent().html(), {title:"<h3>订单收货地址：</h3>"});
+            map.openInfoWindow(order_infoWindow, order_point);
+        });
+ 
+        // 创建原始店铺的地址
+        var shop = $('#order-' + id + '-shop'),
+            shop_id = shop.data('shop-id'),
+            shop_lng = shop.data('shop-lng'),
+            shop_lat = shop.data('shop-lat'),
+            shop_address = shop.data('shop-address'),
+            shop_address_reference = shop.data('shop-address-reference');
+        var shop_point = new BMap.Point(shop_lng, shop_lat);
+        var shopIcon = new BMap.Icon("__PUBLIC__/images/map/shop_marker.png", new BMap.Size(80,118));
+        var shop_marker = new BMap.Marker(shop_point, {icon:shopIcon});         // 创建商店标注  
+    　　map.addOverlay(shop_marker);                                 // 将标注添加到地图中
+        // shop_marker.setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+
+        var shop_order_distance = (map.getDistance(order_point,shop_point)).toFixed(2)+' 米。';  //获取两点距离,保留小数点后两位
+        var shop_order_polyline = new BMap.Polyline([order_point,shop_point], {strokeColor:"blue", strokeWeight:6, strokeOpacity:0.5});  //定义折线
+        map.addOverlay(shop_order_polyline);     //添加折线到地图上
+
+        shop_marker.addEventListener("click", function(e) {
+            var shop_infoWindow = new BMap.InfoWindow(shop.html()+'<p class="m-t">地址：'+shop_address+'&nbsp;'+shop_address_reference+'</p>距离：'+shop_order_distance, {title:"<h3>下单店铺：</h3>"});  // 创建信息窗口对象 
+            map.openInfoWindow(shop_infoWindow, shop_point); //开启信息窗口
+        });
+
+        // 如果已经分单则创建分店店铺标注
+        if (shop.data('final-shop-id')) {
+            var final_shop_id = shop.data('final-shop-id'),
+                final_shop_lng = shop.data('final-shop-lng'),
+                final_shop_lat = shop.data('final-shop-lat'),
+                final_shop_name = shop.data('final-shop-name'),
+                final_shop_address = shop.data('final-shop-address'),
+                final_shop_address_reference = shop.data('final-shop-address-reference');
+            var final_shop_point = new BMap.Point(final_shop_lng, final_shop_lat);
+            var final_shopIcon = new BMap.Icon("__PUBLIC__/images/map/final_shop_marker.png", new BMap.Size(80,118));
+            var final_shop_marker = new BMap.Marker(final_shop_point, {icon:final_shopIcon});         // 创建商店标注  
+        　　map.addOverlay(final_shop_marker);                                 // 将标注添加到地图中
+            final_shop_marker.setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+
+            var final_shop_order_distance = (map.getDistance(order_point,final_shop_point)).toFixed(2)+' 米。';  //获取两点距离,保留小数点后两位
+            var final_shop_order_polyline = new BMap.Polyline([order_point,final_shop_point], {strokeColor:"red", strokeWeight:6, strokeOpacity:0.5});  //定义折线
+            map.addOverlay(final_shop_order_polyline);     //添加折线到地图上
+
+            final_shop_marker.addEventListener("click", function(e) {
+                var final_shop_infoWindow = new BMap.InfoWindow(final_shop_name+'<p class="m-t">地址：'+final_shop_address+'&nbsp;'+final_shop_address_reference+'</p>距离：'+final_shop_order_distance, {title:"<h3>分单店铺：</h3>"});  // 创建信息窗口对象 
+                map.openInfoWindow(final_shop_infoWindow, final_shop_point); //开启信息窗口
+            });
+        } else {
+            shop_marker.setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+        }
+    }
+
+    // 显示详细清单
+    function show_item(_this) {
+        var item = $(_this).data('item');
+        var html = template('tpl_order_item', {'list':item});
+        top.layer.open({
+            title: '清单',
+            content: html,
+            area: '600px'
+        });
+    }
+
+
+    // 打印订单
+    function send_print_order(id) {
+        top.layer.confirm("你确定要打印此订单吗？", function(){
+            top.layer.msg("正在打印……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("send_print_order")}', {order_id:id}, function(result){
+                if (result.status == 1) {
+                    top.layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    });
+                } else {
+                    top.layer.msg(result.info, {time: 1000});
+                }
+            }, 'json');
+        });
+    }
+
+    // 确认订单
+    function sure_order(id) {
+        top.layer.confirm("你确定要确认此订单吗？", function(){
+            top.layer.msg("正在确认……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("sure_order")}', {order_id:id}, function(result){
+                if (result.status == 1) {
+                    top.layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    }, function(){
+                        window.location.reload();
+                    });
+                } else {
+                    top.layer.msg(result.info, {time: 1000});
+                }
+            }, 'json');
+        });
+    }
+
+    // 取消订单
+    function cancel_order(id) {
+        top.layer.confirm("你确定要取消此订单吗？<br>注意，取消操作不可还原", function(){
+            top.layer.msg("正在取消……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("cancel_order")}', {order_id:id}, function(result){
+                if (result.status == 1) {
+                    top.layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    }, function(){
+                        window.location.reload();
+                    });
+                } else {
+                    top.layer.msg(result.info, {time: 1000});
+                }
+            }, 'json');
+        });
+    }
+
+    // 分单
+    function final_shop_order(id) {
+        // 循环在地图上创建标注（做的复杂一点可以在侧栏做一个列表，有分页，并且可以按照餐厅商店繁忙程度来排序，加权）
+        layer.open({
+            type: 1,
+            title: '分单',
+            content: '<div id="milkMap"></div>',
+            area: '800',
+        });
+
+        // 初始化地图
+        var map = new BMap.Map("milkMap");
+        map.enableScrollWheelZoom();
+        // map.enableInertialDragging();
+        map.enableContinuousZoom();
+
+        var address = $('#order-' + id + '-address'),
+            lng = address.data('lng'),
+            lat = address.data('lat');
+
+        var point = new BMap.Point(lng, lat);
+        map.centerAndZoom(point, 14);
+
+
+        var order_Icon = new BMap.Icon("__PUBLIC__/images/map/order_marker.png", new BMap.Size(80,118));
+        var order_marker = new BMap.Marker(point, {icon:order_Icon});         // 创建订单标注  
+    　　map.addOverlay(order_marker);                                 // 将标注添加到地图中
+        order_marker.setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+        order_marker.addEventListener("click", show_order_info);
+
+        function show_order_info(e) {
+            var infoWindow = new BMap.InfoWindow(address.parent().parent().html(), {title:"订单收货地址："});  // 创建信息窗口对象 
+            map.openInfoWindow(infoWindow, point); //开启信息窗口
+            // alert(e.point.lng+e.point.lat);
+        }
+
+        // 创建原始店铺的地址
+        var shop = $('#order-' + id + '-shop'),
+            shop_id = shop.data('shop-id'),
+            shop_type = shop.data('shop-type'),
+            shop_lng = shop.data('shop-lng'),
+            shop_lat = shop.data('shop-lat'),
+            shop_address = shop.data('shop-address'),
+            shop_address_reference = shop.data('shop-address-reference');
+        var shop_point = new BMap.Point(shop_lng, shop_lat);
+        var shopIcon = new BMap.Icon("__PUBLIC__/images/map/shop_marker.png", new BMap.Size(80,118));
+        var shop_marker = new BMap.Marker(shop_point, {icon:shopIcon});         // 创建商店标注  
+    　　map.addOverlay(shop_marker);                                 // 将标注添加到地图中
+        shop_marker.setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+        shop_marker.addEventListener("click", function(e) {
+            var order_infoWindow = new BMap.InfoWindow(shop.html()+'<br />地址：'+shop_address+'&nbsp;'+shop_address_reference+'<br /><button type="button" onclick="final_shop_order_act('+id+','+shop_id+')" class="btn btn-info btn-sm m-t"  ><i class="fa fa-send-o"></i>&nbsp;这里出餐</button>', {title:"下单店铺："});  // 创建信息窗口对象 
+            map.openInfoWindow(order_infoWindow, shop_point); //开启信息窗口
+        });
+
+        // 解决循环添加标注要用闭包非常麻烦的方法
+        function addClickHandler(content, marker, point, title) {
+            marker.addEventListener("click",function(e){
+                var shop_infoWindow = new BMap.InfoWindow(content, {title:title});
+                map.openInfoWindow(shop_infoWindow, point); //开启信息窗口
+            });
+        }
+
+        // 获取附近分店地址
+        $.getJSON("{:U('get_lbs')}?" + Math.random(), {location:lng+','+lat,shop_type:shop_type}, function(result){
+            if (result.status == 0 && result.contents.length > 0) {
+                var contents = result.contents;
+                var other_shopIcon = new BMap.Icon("__PUBLIC__/images/map/other_shop_marker.png", new BMap.Size(80,118));
+                var other_shop_point = new Array();
+                var other_shop_marker = new Array();
+                var infoWindow = new Array();
+                var info = new Array();
+                for (var i in contents) {
+                    var item = contents[i];
+                    info[i] = item.title +
+                            (item.shop_business_type == 1 ? '<br><span class="label">平台</span>' : '&nbsp;<span class="label">第三方</span>') + 
+                            ('&nbsp;<span class="label">' + item.shop_type_name + '</span><br>') +
+                            ('<br />地址：'+item.address+'&nbsp;'+item.address_reference+'<br />距离：'+item.distance+'m<br /><button type="button" onclick="final_shop_order_act('+id+','+item.shop_id+')" class="btn btn-info btn-sm m-t"  ><i class="fa fa-send-o"></i>&nbsp;这里出餐</button>');
+                    if (shop_id == item.shop_id) {
+                        addClickHandler(info[i], shop_marker, shop_point, '下单店铺：');
+                        continue;
+                    }
+                    other_shop_point[i] = new BMap.Point(item['location'][0], item['location'][1]);
+                    other_shop_marker[i] = new BMap.Marker(other_shop_point[i], {icon:other_shopIcon});         // 创建其它商店标注  
+                　　map.addOverlay(other_shop_marker[i]);
+                    other_shop_marker[i].setAnimation(BMAP_ANIMATION_BOUNCE);             // 跳动的动画
+                    addClickHandler(info[i], other_shop_marker[i], other_shop_point[i], '附近店铺：');
+                }
+            }
+        });
+    }
+    function final_shop_order_act(id, final_shop_id) {
+        top.layer.confirm("你确定要分单吗？", function(){
+            top.layer.msg("正在分单……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("final_shop_order")}', {order_id:id,final_shop_id:final_shop_id}, function(result){
+                if (result.status == 1) {
+                    top.layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    }, function(){
+                        window.location.reload();
+                    });
+                } else {
+                    top.layer.msg(result.info, {time: 1000});
+                }
+            }, 'json');
+        });
+    }
+</script>

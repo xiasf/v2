@@ -1,0 +1,30 @@
+<link href="__PUBLIC__/wap/Home/User/css/loginbind.css" type="text/css" rel="stylesheet" />
+
+<script>
+    var loginbind_url = '{:U("User/loginBind")}';
+</script>
+
+<div id="main" class="main_warp">
+<div class="bind-wrap">
+    <span class="imghead">
+       <img src="{$oauth_user_info.headimgurl}" onerror="this.src = '__PUBLIC__/images/avatar/webwxgeticon.jpg'">
+       <!-- <span class="nickname">{$oauth_user_info.nickname|default="昵称"}</span> -->
+    </span>
+    <span class="title title-login">关联已有五味真火通行证帐号</span>
+    <form id="loginBindForm" method="post" action="">
+        <div class="txt-wrap input-container">
+            <label for="mobile"><i class="fa fa-user fa-2x"></i></label>
+            <input type="text" name="mobile" class="acc-input" id="mobile" value="" placeholder="请输入手机/用户名/邮箱">
+        </div>
+        <div class="txt-wrap input-container" style="position:relative;">
+            <label for="password"><i class="fa fa-lock fa-2x"></i></label>
+            <input type="text" name="password" id="password" class="acc-input" placeholder="请输入密码">
+        </div>
+        <span class="tip">关联后，您的微信帐号和五味真火通行证帐号都可以进行登录</span>
+        <a class="btn b-btn new-abtn-default" href="javascript:;" id="loginBtn">登录</a>
+        <span class="tip">暂不关联，&nbsp;<a href="{:U('login')}">直接登录</a></span>
+    </form>
+</div>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/loginbind.js"></script>

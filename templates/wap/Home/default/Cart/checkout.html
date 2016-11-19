@@ -1,0 +1,99 @@
+<link href="__PUBLIC__/wap/Home/Cart/css/checkout.css" type="text/css" rel="stylesheet" />
+
+<script>
+	// 显示加载层
+	var area_init_load = layer.open({
+        type: 2,
+        shadeClose: false,
+    });
+	window.history.forward();									// 防止刷新
+	var cart_checkout_post_url = '{:U("checkout")}';			// 提交订单接口
+	var area_url = '{:U("Area/index")}';							// 切换位置
+	var choose_url = '{:U("Choose/index")}';							// 点餐入口
+	var pay_url = '{:U("pay")}';							// 支付入口
+	var remindorder_url = '{:U("Index/remindorder")}';							// 订单中心入口
+</script>
+
+
+<!-- start main -->
+<div id="main" class="main_warp">
+	<div id="area_wrap" class="wrap">
+		<form id="cart_form" method="post">
+			<input type="hidden" value="" name="lng" />
+			<input type="hidden" value="" name="lat" />
+			<input type="hidden" value="2" name="pay_type" />
+			<input type="hidden" value="1" name="user_sex" />
+			<input type="hidden" value="家" name="address_tag" />
+			<label>
+				<i class="fa fa-map-marker fa-2x ico"></i>
+				<input type="text" readonly value="" name="location" placeholder="读取中……" />
+			</label>
+			<label>
+				<i class="fa fa-building ico"></i>
+				<input type="text" value="" name="address" placeholder="详细地址" />
+			</label>
+			<label>
+				<i class="fa fa-mobile-phone fa-2x ico"></i>
+				<input type="text" value="" name="mobile" placeholder="手机号码" />
+			</label>
+			<label>
+				<i class="fa fa-user ico"></i>
+				<input type="text" value="" name="user_name" placeholder="称呼（选填）" />
+			</label>
+		</form>
+	</div>
+
+	<div id="pay_type" class="wrap">
+		<p class="title"><i class="fa fa-money"></i>选择支付方式</p>
+		<p class="pay on" onclick="pay(this, 2)"><i class="fa fa-check-circle"></i>在线支付<span class="pay_hot">推荐</span><span class="pay_note">支持支付宝，微信，银行卡支付哦</span></p>
+		<p class="pay" onclick="pay(this, 1)"><i class="fa fa-circle-o"></i>餐到付款</p>
+	</div>
+
+	<div id="products_list" class="wrap">
+		<empty name="products_list">
+		<p class="no">购物车是空的哦</p>
+		<else />
+		<p class="title">{$products_list.order_name}</p>
+		<ul>
+			<li>
+				<span class="name">名称</span>
+				<span class="price">价格</span>
+				<span class="num">数量</span>
+				<span class="summary">小结</span>
+			</li>
+			<foreach name="products_list.list">
+			<li>
+				<span class="name">{$item.product_name}</span>
+				<span class="price">{$item.product_price}</span>
+				<input type="text" readonly class="num" value="{$item.product_num}" />
+				<span class="summary">{$item.summary}</span>
+			</li>
+			</foreach>
+		</ul>
+		</empty>
+	</div>
+
+</div>
+<!-- end main -->
+
+<div id="checkout_wrap">
+	<div id="checkout">
+		<span id="cart_num">{$products_list.product_num|default=0}</span>
+		<span id="cart_total">{$products_list.total|default=0}</span>
+	</div>
+	<input type="button" id="submit_button" value="提交订单" onclick="submit_order()" />
+</div>
+
+<!-- <link href="__PUBLIC__/plugins/buttons/css/buttons.css" type="text/css" rel="stylesheet" /> -->
+
+<script src="__PUBLIC__/wap/Home/Common/js/area.js"></script>
+<script src="__PUBLIC__/wap/Home/Common/js/cart.js"></script>
+
+<script src="__PUBLIC__/plugins/artTemplate/dist/template.js"></script>
+
+<script src="__PUBLIC__/js/number.js"></script>
+<script src="__PUBLIC__/wap/Home/Cart/js/checkout.js"></script>
+
+<script>
+	
+</script>

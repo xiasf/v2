@@ -1,0 +1,74 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>oauth列表<span class="label label-primary pull-right">{$oauth_count}</span></h5>
+                    <a href="{:U('server/oauth_add')}" class="J_menuItem pull-right"><i class="fa fa-plus"></i>&nbsp;添加oauth</a>
+                </div>
+                <div class="ibox-content">
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-4 pull-right">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false">名称&nbsp;<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="form_basic.html#">地址</a>
+                                        </li>
+                                        <li><a href="form_basic.html#">负责人姓名</a>
+                                        </li>
+                                        <li><a href="form_basic.html#">手机号码</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li><a href="form_basic.html#">其它</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <input type="text" placeholder="搜索很简单^_^" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>oauth名称</th>
+                                <th>oauth标示</th>
+                                <th>描述</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name="oauth_list" item="oauth">
+								<tr>
+                                    <td>{$oauth['id']}</td>
+                                    <td><img class="m-r" src="__ROOT__/{$oauth['logo']}" />{$oauth['title']}</td>
+                                    <td>{$oauth['name']}</td>
+                                    <td>{$oauth['description']}</td>
+                                    <td><eq name="oauth['status']" value="1"><span class="label label-primary">已启用</span><else/><span class="label label-danger">已关闭</span></eq></td>
+                                    <td><a href="{:U('server/oauth_update', array('id' => $oauth['id']))}" class="btn btn-white btn-sm"><i class="fa fa-edit"></i>&nbsp;修改</a></td>
+                                </tr>
+							</foreach>
+                        </tbody>
+
+                        <tfoot>
+                        	<tr>
+                        		<td colspan="11"><div class="pull-right">{$page_show}</div></td>
+                        	</tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+    });
+</script>

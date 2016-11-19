@@ -1,0 +1,89 @@
+/**
+ * 首页页面样式
+ * update：2016-4-3 16:03:20
+ */
+
+.cat {
+    margin: 12px 0;
+    text-align: center;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-left: 5px;
+    margin-right: 5px;
+    -webkit-box-shadow: #828282 1px 1px 5px;
+}
+.cat:before {
+	position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.21);
+    top: 0;
+    left: 0;
+}
+.cat span {
+    position: absolute;
+    display: block;
+    top: -1px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    color: #FFF;
+    text-align: center;
+    margin: auto;
+    z-index: 2;
+    height: 100px;
+    line-height: 100px;
+    text-shadow: 2px 2px 5px #3D3D3D;
+    font-size: 3.2rem;
+    box-shadow: 0 2px 6px -2px #000,inset 0 2px 2px 1px #FFF;
+    border: 1px #927B75 solid;
+    border-width: 1px 0 0;
+}
+.cat span:before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.04);
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+.cat span:after {
+	position: absolute;
+	content: '';
+	height: 100px;
+	width: 100%;
+	top: 0;
+    left: 0;
+	/*-webkit-filter: blur(4px);*/
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    /*overflow: hidden;*/
+
+    filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+    -webkit-filter: blur(4px); /* Chrome, Opera */
+       -moz-filter: blur(4px);
+        -ms-filter: blur(4px);    
+            filter: blur(4px);
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=4, MakeShadow=false); /* IE6~IE9 */
+}
+#cat_warp li:nth-child(1) span:after {
+    background-image: url('/Public/images/kuaican.jpg');
+}
+#cat_warp li:nth-child(2) span:after {
+    background-image: url('/Public/images/meishi.jpg');
+}
+#cat_warp li:nth-child(3) span:after {
+    background-image: url('/Public/images/shuiguo.jpg');
+}
+#cat_warp li:nth-child(4) span:after {
+    background-image: url('/Public/images/bcp.jpg');
+}
+.cat img {
+	width: 100%;
+	display: block;
+}

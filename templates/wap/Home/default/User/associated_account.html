@@ -1,0 +1,23 @@
+<link href="__PUBLIC__/wap/Home/User/css/associated_account.css" type="text/css" rel="stylesheet" />
+
+<script>
+</script>
+
+<div id="main" class="main_warp">
+	<div class="guide-wrap">
+	    <div class="imghead">
+	       <img src="{$oauth_user_info.headimgurl}" onerror="this.src = '__PUBLIC__/images/avatar/webwxgeticon.jpg'">
+           <span class="nickname">{$oauth_user_info.nickname|default="昵称"}</span>
+	    </div>
+	    <div class="nickname-wrap">
+	        <span class="desc">为了给您更好的服务，请关联一个五味真火通行证账号</span>
+	    </div>
+	    <span class="title enter-title">还没有五味真火通行证账号?</span>
+	    <a class="btn b-btn J_ping fast-reg" href="{:U('User/regBind')}">快速注册</a>
+	    <span class="title bind-title">已有五味真火通行证账号?</span>
+	    <a class="btn b-btn bind J_ping" href="{:U('User/loginBind')}">立即关联</a>
+	    <p id="switchUrl" style="position: absolute; bottom: 10px; left: 0px; right: 0px; text-align: center; display: none;"><a href="">使用五味真火通行证账号直接登录</a></p>
+	</div>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/associated_account.js"></script>

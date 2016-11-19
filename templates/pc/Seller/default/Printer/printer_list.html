@@ -1,0 +1,147 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>打印机列表<span class="label label-primary pull-right">{$printer_count}</span></h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-3">
+
+                            <div data-toggle="buttons-checkbox" class="btn-group">
+                                <button class="btn btn-primary active" type="button" aria-pressed="true">全部(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="false">营业(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true">关闭(12)</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 pull-right">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false">名称&nbsp;<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="form_basic.html#">地址</a>
+                                            </li>
+                                            <li><a href="form_basic.html#">负责人姓名</a>
+                                            </li>
+                                            <li><a href="form_basic.html#">手机号码</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="form_basic.html#">其它</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <input type="text" placeholder="搜索很简单^_^" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;搜索</button></span>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="hr-line-dashed"></div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>打印机名称</th>
+                                <th>终端号</th>
+                                <th>密匙</th>
+                                <th>状态</th>
+                                <th>是否启用</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name="printer_list" item="printer">
+								<tr>
+                                    <td>{$printer['id']}</td>
+                                    <td>{$printer['printname']}</td>
+                                    <td>{$printer['machine_code']}</td>
+                                    <td>{$printer.msign}</td>
+                                    <td class="printer_check" width='120'></td>
+                                    <td><eq name="printer['status']" value="1"><span class="label label-primary">已启用</span><else/><span class="label label-danger">已关闭</span></eq></td>
+                                    <td>
+                                        <a href="javascript:void(0)" onclick="send_check({$printer['id']})" class="btn btn-white btn-sm"><i class="fa fa-paper-plane"></i>&nbsp;测试</a>
+                                        &nbsp;&nbsp;<a href="{:U('printer/update', array('id' => $printer['id']))}" class="btn btn-white btn-sm"><i class="fa fa-edit"></i>&nbsp;修改</a>
+                                        &nbsp;&nbsp;<a href="javascript:void(0)" onclick="printer_del({$printer['id']})" class="btn btn-white btn-sm"><i class="fa fa-times-circle"></i>&nbsp;删除</a></td>
+                                </tr>
+							</foreach>
+
+                        </tbody>
+
+                        <tfoot>
+                        	<tr>
+                        		<td colspan="11"><div class="pull-right">{$page_show}</div></td>
+                        	</tr>
+                        </tfoot>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        // 远程终端检测
+        function printer_check(_this) {
+            _this.html('<span class="badge badge-danger"><i class="fa fa-refresh fa-spin"></i>&nbsp;检查中…</span>');
+            _this.prev().css('color', '#C5C5C5');
+            $.getJSON('{:U("printer_check")}'+'?'+Math.random(), {id:_this.parent().children(":first").html()}, function(result){
+                _this.prev().css('color', '');
+                if (result.status == 1) {
+                    _this.html('<span class="badge badge-primary"><i class="fa fa-check"></i>&nbsp;'+result.info+'</span>');
+                } else {
+                    _this.html('<span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i>&nbsp;'+result.info+'</span>');
+                }
+            });
+        }
+        $('.printer_check').each(function(){
+            printer_check($(this));
+            $(this).click(function(){
+                printer_check($(this));
+            });
+        });
+    });
+
+    function printer_del(id) {
+        layer.confirm("你确定要删除此打印机吗？<br>注意，删除操作不可还原", function(){
+            layer.msg("正在删除……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("trur_delete")}', {id:id}, function(result){
+                if (result.status == 1) {
+                    layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    }, function(){
+                        window.location.reload();
+                    });
+                } else {
+                    layer.msg(result.info, {time: 1000});
+                }
+            }, 'json');
+        });
+    }
+
+    function send_check(id) {
+        layer.prompt({
+            title: '测试打印机',
+            value: '测试内容',
+            formType: 0,
+            btn: ['发送', '取消'],
+        }, function(text, index) {
+            layer.title('正在发送……',index);
+            $.post('{:U("send_check")}', {id:id, content:text}, function(result){
+                if (result.status == 1) {
+                    // layer.close(index);
+                    layer.msg("发送成功！<br/ >" + '票据ID：' + result.id,{time:1000});
+                } else {
+                    layer.msg(result.info, {time: 1000});
+                }
+            }, 'json');
+        });
+    }
+</script>

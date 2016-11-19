@@ -1,0 +1,216 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>编辑商户</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="sellerForm" method="post" class="form-horizontal" action="">
+                        <input type="hidden" name="id" value="" />
+                        <div class="form-group">
+                            <input type="hidden" name="logo" value="" />
+                            <label class="col-sm-2 control-label">商户logo</label>
+                            <div class="col-sm-6">
+                                <div class="uploader-list" id="fileList_logo"></div>
+                                <div id="filePicker_logo" class="filePicker"><i class="fa fa-cloud-upload"></i></div>
+                                <script type='text/html' id='tpl_fileList_logo'>
+                                    <div class="file-item thumbnail">
+                                        <img src="__ROOT__/{{picRoot.img}}" alt="{{picRoot.img}}">
+                                    </div>
+                                </script>
+                                <span class="col-sm-12 help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;请务必上传等比例图片，建议100*100像素</span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <input type="hidden" name="paper_img" value="" />
+                            <label class="col-sm-2 control-label">法人执证件照片</label>
+                            <div class="col-sm-6">
+                                <div class="uploader-list" id="fileList_paper_img"></div>
+                                <div id="filePicker_paper_img" class="filePicker"><i class="fa fa-cloud-upload"></i></div>
+                                <script type='text/html' id='tpl_fileList_paper_img'>
+                                    <div class="file-item thumbnail">
+                                        <img src="__ROOT__/{{picRoot.img}}" alt="{{picRoot.img}}">
+                                    </div>
+                                </script>
+                                <span class="col-sm-12 help-block m-t m-b-none alert alert-warning">请务必上传黄金比例图片，建议420*260像素</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商户名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="seller_name" placeholder="如：无味真火" required>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">公司名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="company_name" placeholder="如：湖北德胜餐饮有限公司">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">座机号码</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="contacts_phone" placeholder="如：0713 8667123">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">收款账号</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="settlement_account" placeholder="请填写支付宝账号">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">收款银行卡信息</label>
+                            <div class="col-sm-5">
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon">开户行</span>
+                                    <input type="text" name="bank_name" class="form-control" placeholder="如：中国工商银行">
+                                </div>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon">开户人</span>
+                                    <input type="text" name="bank_user_name" class="form-control" placeholder="请填写您的开户姓名">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">卡　号</span>
+                                    <input type="text" name="bank_card" class="form-control" placeholder="请填写您的银行卡号">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系人手机号码</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="contacts_mobile" placeholder="如：15997152146">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系人邮箱</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="contacts_email" placeholder="如：811800545@qq.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商户联系人姓名</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="contacts_name" placeholder="如：夏凯">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商户简介</label>
+                            <div class="col-sm-5">
+                                <textarea type="textarea" class="form-control" name="describe" placeholder="如：湖北德胜餐饮有限公司成立于2014年……"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">状态</label>
+                            <div class="col-sm-5">
+                                <input type="checkbox" class="js-switch" name="status" value="1" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group row">
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">修改时间</span>
+                                            <input type="text" value="<if condition='$seller_data["update_time"]'>{$seller_data.update_time|date='Y-m-d H:i:s',###}</if>" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">创建时间</span>
+                                            <input type="text" value="{$seller_data.create_time|date='Y-m-d H:i:s',###}" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/js/webuploader/uploader.js"></script>
+<script>
+    $(function(){
+        var formObj = new Form('sellerForm');
+        var seller_data = {:json_encode($seller_data)};
+        formObj.init(seller_data);
+
+        if (seller_data.logo) {
+            var picHtml = template('tpl_fileList_logo', {'picRoot':{"img":seller_data.logo}});
+            $('#fileList_logo').append(picHtml);
+        }
+
+        if (seller_data.paper_img) {
+            var picHtml = template('tpl_fileList_paper_img', {'picRoot':{"img":seller_data.paper_img}});
+            $('#fileList_paper_img').append(picHtml);
+        }
+
+        $("#filePicker_logo").uploader({
+            server:'{:U("seller/img_upload?file=logo")}',
+            filelist:"#fileList_logo",
+            fileVal:'logo',
+            uploaded:function(result){
+                $("input[name='logo']").val(result.url.slice(1));
+            },
+        });
+
+        $("#filePicker_paper_img").uploader({
+            server:'{:U("seller/img_upload?file=paper_img")}',
+            filelist:"#fileList_paper_img",
+            fileVal:'paper_img',
+            uploaded:function(result){
+                $("input[name='paper_img']").val(result.url.slice(1));
+            },
+        });
+
+        new Switchery(document.querySelector(".js-switch"), {color: "#1AB394"});
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+
+
+        $("form[name=sellerForm]").submit(function(){
+            // return true;
+            $.post("{:U('update')}", $(this).serialize(), function(result){
+                if (result.status == 1) {
+                    alert(result.info);
+                    window.location.href = result.url;
+                } else {
+                    alert(result.info);
+                }
+            });
+            return false;
+        });
+    });
+</script>

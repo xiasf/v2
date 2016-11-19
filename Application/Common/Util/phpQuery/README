@@ -1,0 +1,35 @@
+phpQuery是基于php5新添加的DOMDocument。而DOMDocument则是专门用来处理html/xml。它提供了强大 xpath选 择器及其他很多html/xml操作函数，使得处理html/xml起来非常方便。那为什么不直接使用呢？这个，去看一下官网的函数列表 就知道了，如果 对自己的记忆力很有信心， 不妨一试。
+
+采集是一个蛋疼的活，HTML的采集烦躁啊，对于html页面，不应该使用正则的原因主要有3个
+
+1. 编写条件表达式比较麻烦  
+尤其对于新手，看到一堆”不知所云”的字符评凑在一起，有种脑袋都要炸了的感觉。如果要分离的对象没有太明显的特征，正则写起来更是麻烦。
+
+2. 效率不高 
+对于php来说，正则应该是没有办法的办法，能通过字符串函数解决的，就不要劳烦正则了。用正则去处理一个30多k的文件，效率不敢保证。
+
+3. 有phpQuery 
+如果你使用过jQuery，想获取某个特定元素应该是轻而易举的事情，phpQuery让这成为了可能。
+
+几个简单的例子
+获取到网页的title
+
+<?php    
+    include 'phpQuery.php'; 
+    phpQuery::newDocumentFile('url地址。。。');
+    $title= pq('title')->text(); 
+    echo $title; 
+    
+获取到网页的A 标签连接
+<?php    
+    include 'phpQuery.php'; 
+    phpQuery::newDocumentFile('url地址。。。');
+    $anchrs = pq('a'); 
+    foreach($anchrs as $a){
+        echo pq($a)->getAttribute('href');
+    }
+    
+小结
+- pq()就像jQuery里的$()
+- 基本上jQuery的选择器都可以用在phpQuery上，只要把’.'变成’->’
+- phpQuery提供了好几种载入文件的方法，有的使用字符串，有的使用文件(包括url)，选 择的时候要注意

@@ -1,0 +1,131 @@
+/**
+ * WebUploader 封装
+ * update；2016-4-21 16:45:15
+ */
+
+@charset "utf-8";
+/* default style */
+
+.webuploader-container {
+    position: relative;
+}
+.webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+.webuploader-pick {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: #00b7ee;
+    padding: 10px 15px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.webuploader-pick-hover {
+    background: #00a2d4;
+}
+
+.webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events:none;
+}
+
+
+/* demo样式 */
+
+#filePicker, .filePicker {position: relative;float: left;}
+.webuploader-pick {
+    width: 100px;
+    height: 100px;
+    background-color: #FBFBFB;
+    text-align: center;
+    line-height: 80px;
+    border: 2px #ddd solid;
+    border-style: dashed;
+    color: #B5B5B5;
+    font-size: 25px;
+    float: left;
+    margin: 40px;
+}
+.webuploader-pick-hover {
+    border-color: #A7A7A7;
+}
+
+.uploader-list {
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+
+#picker { display: inline-block; line-height: 1.428571429; vertical-align: middle; margin: 0 12px 0 0; }
+#picker .webuploader-pick { padding: 6px 12px; display: block; }
+.thumbnail {
+}
+.thumbnail img {
+    margin: auto;
+    vertical-align: middle;
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 152px;
+    max-height: 152px;
+}
+.uploader-list {
+    overflow: hidden;
+}
+.file-item {
+    padding: 0;
+    background: #ddd url(../../images/bg/transparent.png);
+    position: relative;
+    display: inline-flex;
+    margin: 10px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px #ddd, 0 1px 8px rgba(0, 0, 0, 0.29);
+    border: 4px #FFF solid;
+    width: 160px;
+    height: 160px;
+}
+.file-item .error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(187, 0, 0, 0.63);
+    color: #FFF;
+    text-align: center;
+    height: 20px;
+    font-size: 12px;
+    line-height: 22px;
+}
+.file-item .btngroup { position: absolute;bottom:-900px; z-index: 10;left:10px;}
+.file-item-done {
+    box-shadow: 0 0 0 1px #47D6A1, 0 1px 8px rgba(0, 0, 0, 0.29);
+}
+.file-item-done .btngroup {bottom:0px;}
+.file-item.file-item-current{border-color:#0C0}
+.file-item.file-item-current .btngroup{display:none}
+.file-item.file-item-current:after { content: "\f00c"; font-family: FontAwesome; font-style: normal; font-weight: normal; line-height: 1; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-size: 48px; position: absolute; top:0;left:0; color:#090; z-index: 99; }
+.file-item .progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 22px;
+    left: 0;
+    overflow: hidden;
+    z-index: 15;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background-color: rgba(0,0,0,.6);
+}
+
+.file-item .progress span {
+    display: block;
+    width: 0%;
+    height: 22px;
+    background-color: #F53E3E;
+}

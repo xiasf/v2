@@ -1,0 +1,32 @@
+<link href="__PUBLIC__/wap/Home/User/css/login.css" type="text/css" rel="stylesheet" />
+
+<script>
+	var login_url = '{:U("login")}';
+</script>
+
+<div id="main" class="main_warp">
+	<section class="page">
+	    <div class="wrap loginPage">
+	        <div class="input-container">
+	        	<label for="mobile"><i class="fa fa-user fa-2x"></i></label>
+	            <input id="mobile" name="mobile" class="acc-input" type="text" placeholder="手机号/用户名/邮箱" autocomplete="off">
+	        </div>
+	        <div class="input-container">
+	        	<label for="password"><i class="fa fa-lock fa-2x"></i></label>
+	            <input id="password" name="password" type="password" class="acc-input" placeholder="请输入密码" autocomplete="off">
+	        </div>
+	        <a href="javascript:void(0);" id="loginBtn" class="btn">登 录</a>
+	        <div class="quick-nav">
+	            <a href="javascript:void(0);" class="findpwd"><i class="fa fa-key"></i>&nbsp;找回密码</a>
+	            <a href="{:U('register')}" class="quickReg"><i class="fa fa-sign-in"></i>&nbsp;快速注册</a>
+	            <div class="clear"></div>
+	        </div>
+	        <div class="quick-login">
+	            <h4>其他登录方式</h4>
+	            <a href="{:U('User/oauth')}" class="quick-wx"><i class="icon icon-wx"></i>微信登陆</a>
+	        </div>
+	    </div>
+	</section>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/login.js"></script>

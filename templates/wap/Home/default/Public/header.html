@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Language" content="zh-cn" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="keywords" content="{:seo('keywords')}" />
+<meta name="description" content="{:seo('description')}" />
+<link rel="icon" href="__PUBLIC__/images/favicon.ico" type="image/x-icon" />
+<link href="__STATIC__/plugins/Font-Awesome/css/font-awesome.min.css?t2016620170620" type="text/css" rel="stylesheet" />
+<link href="__PUBLIC__/wap/Home/Common/css/base.css?t2016620170620" type="text/css" rel="stylesheet" />
+<script src="__STATIC__/plugins/jquery/3.0.0-beta1/jquery.min.js?t=2016620170620"></script>
+<script src="__STATIC__/plugins/jquery-cookie/src/jquery.cookie.js?t=2016620170620"></script>
+<script src="__STATIC__/plugins/fastclick/1.0.6/fastclick.min.js?t=2016620170620"></script>
+<script src="__STATIC__/plugins/layer.mobile/layer/layer.js?t=2016620170620"></script>
+<script src="__STATIC__/plugins/artTemplate/dist/template.js"></script>
+<script src="__PUBLIC__/wap/Home/Common/js/common.js?t=2016620170620"></script>
+<title>{:seo('title')}</title>
+</head>
+<body>
+	<div id="sf_mask" class="sf_mask"></div>
+	<div id="head_wrap">
+		<a id="h_l" href="{:U('Home/Index/index')}">
+			<i class="fa fa-home fa-2x"></i>
+		</a>
+		<div id="local">
+			<a>{:seo('head_title')}</a>
+		</div>
+		<div id="h_r">
+			<i class="fa fa-list fa-2x"></i>
+		</div>
+		<div id="head_more" class="hide">
+			<if condition="is_login()">
+				<span><a style="padding-left: 25px;" href="{:U('User/index')}"><img class="u_img" src="{$oauth_user_info.headimgurl}" onerror="this.src = '__PUBLIC__/images/avatar/taobao_null.jpg'">个人中心</a></span>
+				<else/>
+				<span><a href="{:U('User/login')}"><i class="fa fa-user"></i>登录</a></span>
+			</if>
+			<span><a href="{:U('User/remindorder')}"><i class="fa fa-file-text"></i>我的订单</a></span>
+			<span><a href="{:U('Cart/checkout')}"><i class="fa fa-shopping-cart"></i>购物车</a></span>
+			<span><a href="{:U('Index/s')}"><i class="fa fa-home"></i>首页</a></span>
+			<span><a href="{:U('Index/about')}"><i class="fa fa-group"></i>关于我们</a></span>
+			<if condition="is_login()">
+				<span><a href="{:U('User/logout')}"><i class="fa fa-reply"></i>退出</a></span>
+			</if>
+		</div>
+	</div>

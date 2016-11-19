@@ -1,0 +1,43 @@
+<link href="__PUBLIC__/wap/Home/User/css/regbind.css" type="text/css" rel="stylesheet" />
+
+<script>
+    var sms_code_url = '{:U("send_sms")}';
+    var regbind_url = '{:U("regBind")}';
+</script>
+
+<div id="main" class="main_warp">
+	<div class="reg-wrap">
+        <span class="title reg-title">快速注册并绑定</span>
+        <span class="imghead">
+           <img src="{$oauth_user_info.headimgurl}" onerror="this.src = '__PUBLIC__/images/avatar/webwxgeticon.jpg'">
+           <span class="nickname">{$oauth_user_info.nickname|default="昵称"}</span>
+        </span>
+        <form id="registerForm">
+        <div class="input-box">
+            <div class="input-container">
+                <label for="mobile"><i class="fa fa-mobile-phone fa-2x"></i></label>
+                <input type="tel" id="mobile" name="mobile" class="acc-input telphone txt-input" placeholder="请输入手机号">
+            </div>
+            <button data-mescode="true" class="mesg-code mesg-disable">获取短信确认码</button>
+        </div>
+        <div class="input-container">
+            <label for="smsCode"><i class="fa fa-font fa-2x"></i></label>
+            <input id="smsCode" name="smsCode" class="acc-input txt-input" type="text" placeholder="请输入短信确认码" autocomplete="off">
+        </div>
+        <div class="txt-wrap input-container" style="position:relative;">
+            <label for="smsCode"><i class="fa fa-lock fa-2x"></i></label>
+            <input type="text" id="password" name="password" class="acc-input" rsamodulus="" value="" placeholder="请设置6-20位登录密码" valname="登录密码">
+        </div>
+<!--         <div class="agreement-wrap">
+            <a class="sqr-checkbox checked" id="agree" href="javascript:void(0)"></a>
+            <span class="title">同意</span>
+            <a href="http://m.jd.com//help/app/register.html" class="agreement">《五味真火通行证用户注册协议》</a>
+        </div> -->
+        <span class="tip">注册后，您的微信帐号和五味真火通行证帐号都可以登录</span>
+        <span class="btn b-btn new-abtn-default reg-finish" href="javascript:;" id="regBtn" report-eventid="MLoginRegister_WxQuickRegisterConfirm">注册</span>
+        <span class="tip">已有账号，&nbsp;<a href="{:U('User/login')}">立即登录</a></span>
+    </form>
+</div>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/regbind.js"></script>

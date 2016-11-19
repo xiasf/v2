@@ -1,0 +1,267 @@
+<style type="text/css">
+    #milkMap{
+        height:450px;width:80%;
+        -webkit-box-shadow: 0px 1px 5px #757575;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="wrapper wrapper-content">
+    <div class="row animated bounceInDown">
+        <div class="col-sm-12">
+            <div class=" float-e-margins">
+                <div class="alert alert-warning"><i class="fa fa-warning"></i>&nbsp;注意：请严格填写店铺信息，因为这些信息对店铺的运营管理极为重要。</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>编辑店铺</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="shopForm" method="post" class="form-horizontal" action="">
+                        <input type="hidden" name="id" value="" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">店铺名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="shop_name">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">简介</label>
+                            <div class="col-sm-5">
+                                <textarea type="textarea" class="form-control" name="describe"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <input type="hidden" name="logo" value="" />
+                            <label class="col-sm-2 control-label">logo</label>
+                            <div class="col-sm-6">
+                                <div class="uploader-list" id="fileList_logo"></div>
+                                <div id="filePicker_logo" class="filePicker"><i class="fa fa-cloud-upload"></i></div>
+                                <script type='text/html' id='tpl_fileList_logo'>
+                                    <div class="file-item thumbnail">
+                                        <img src="__ROOT__/{{picRoot.img}}" alt="{{picRoot.img}}">
+                                    </div>
+                                </script>
+                                <span class="col-sm-12 help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;请务必上传等比例图片，建议100*100像素</span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <input type="hidden" name="store_bitmap" value="" />
+                            <label class="col-sm-2 control-label">门店图片</label>
+                            <div class="col-sm-6">
+                                <div class="uploader-list" id="fileList_bitmap"></div>
+                                <div id="filePicker_bitmap" class="filePicker"><i class="fa fa-cloud-upload"></i></div>
+                                <script type='text/html' id='tpl_fileList_bitmap'>
+                                    <div class="file-item thumbnail">
+                                        <img src="__ROOT__/{{picRoot.img}}" alt="{{picRoot.img}}">
+                                    </div>
+                                </script>
+                                <span class="col-sm-12 help-block m-t m-b-none alert alert-warning">请务必上传黄金比例图片，建议420*260像素</span>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">收款账号</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="settlement_account">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">收款银行卡信息</label>
+                            <div class="col-sm-5">
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon">开户行</span>
+                                    <input type="text" name="bank_name" class="form-control">
+                                </div>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon">开户人</span>
+                                    <input type="text" name="bank_user_name" class="form-control">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">卡　号</span>
+                                    <input type="text" name="bank_card" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">使用商户提现账号作为提款账号</label>
+                            <div class="col-sm-5">
+                                <label class="checkbox-inline">
+                                    是：<input type="radio" class="i-checks" name="is_seller_settlement" value="1" />
+                                </label>
+                                <label class="checkbox-inline">
+                                    否：<input type="radio" class="i-checks" name="is_seller_settlement" value="0" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">店铺类型</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="shop_type" disabled title="不可更改了">
+                                    <option value="1">快餐</option>
+                                    <option value="2">烧烤</option>
+                                    <option value="3">烧烤半成品</option>
+                                    <option value="4">水果超市</option>
+                                </select>
+                            </div>
+                            <span class="col-sm-3 help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;不可自主更改店铺类型，如需更改请联系客服</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">店铺经营类型</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="shop_business_type" disabled title="不可更改了">
+                                    <option value="1">自营云餐厅</option>
+                                    <option value="2">第三方合作</option>
+                                </select>
+                            </div>
+                            <span class="col-sm-3 help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;不可更改</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属商户</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="seller_name" disabled title="不可更改了">
+                            </div>
+                            <span class="col-sm-3 help-block m-b-none"><i class="fa fa-info-circle"></i>&nbsp;不可更改，如需办理【店铺过户】请联系客服</span>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">负责人信息</label>
+                            <div class="col-sm-5">
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon">手机号码</span>
+                                    <input type="text" name="contacts_mobile" class="form-control">
+                                </div>
+                                <div class="input-group m-b">
+                                    <span class="input-group-addon">邮箱</span>
+                                    <input type="text" name="contacts_email" class="form-control">
+                                </div>
+                                <div class="input-group">
+                                    <span class="input-group-addon">姓名</span>
+                                    <input type="text" name="contacts_name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地址</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control m-b" name="address">
+                                <div class="input-group">
+                                    <span class="input-group-addon">地址参照物</span>
+                                    <input type="text" name="address_reference" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">经纬度</label>
+
+                            <div class="col-sm-10">
+                                <div class="input-group m-b row">
+                                    <div class="col-md-3">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon">经度</span>
+                                            <input type="text" name="lng" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon">纬度</span>
+                                            <input type="text"  name="lat" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="milkMap"></div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">营业状态</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" name="business_status">
+                                    <option value="0">休息中</option>
+                                    <option value="1">营业中</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group row">
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">修改时间</span>
+                                            <input type="text" value="<if condition='$shop_data["update_time"]'>{$shop_data.update_time|date='Y-m-d H:i:s',###}</if>" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">创建时间</span>
+                                            <input type="text" value="{$shop_data.create_time|date='Y-m-d H:i:s',###}" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/js/webuploader/uploader.js"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=9Go7FByT2xPEH5VcPKMiZWoY"></script>
+<script src="__PUBLIC__/pc/Seller/Shop/js/update.js"></script>
+<script>
+    var img_upload_url = '{:U("shop/img_upload")}';                                     // 图片上传接口
+
+    var formObj = new Form('shopForm');
+    var shop_data = {:json_encode($shop_data)};
+    formObj.init(shop_data);
+
+    if (shop_data.logo) {
+        var picHtml = template('tpl_fileList_logo', {'picRoot':{"img":shop_data.logo}});
+        $('#fileList_logo').append(picHtml);
+    }
+
+    if (shop_data.store_bitmap) {
+        var picHtml = template('tpl_fileList_bitmap', {'picRoot':{"img":shop_data.store_bitmap}});
+        $('#fileList_bitmap').append(picHtml);
+    }
+</script>

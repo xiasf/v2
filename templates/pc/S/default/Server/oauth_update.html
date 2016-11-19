@@ -1,0 +1,152 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>编辑oauth</h5>
+                </div>
+                <div class="ibox-content">
+                    <form id="oauth_form" method="post" class="form-horizontal" action="">
+                        <input type="hidden" name="id" value="" />
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="title">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">标示</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="name">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">AppID</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="AppID">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">AppSecret</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" placeholder="必填" name="AppSecret">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-5">
+                                <textarea type="textarea" class="form-control" name="description">这是描述</textarea>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图标</label>
+                            <div class="col-sm-5">
+                                <input type="file" id="upload_picture">
+                                <input type="hidden" name="logo" id="logo" value=""/>
+                                <div class="upload-img-box">
+                                <notempty name="oauth_data['logo']">
+                                    <div class="upload-pre-item"><img src="__ROOT__/{$oauth_data['logo']}"/></div>
+                                </notempty>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否开启</label>
+                            <div class="col-sm-5">
+                                <input type="checkbox" class="js-switch" name="status" value="1" />
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group row">
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">修改时间</span>
+                                            <input type="text" value="<if condition='$oauth_data["update_time"]'>{$oauth_data.update_time|date='Y-m-d H:i:s',###}</if>" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">创建时间</span>
+                                            <input type="text" value="{$oauth_data.create_time|date='Y-m-d H:i:s',###}" class="form-control" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<link href="__STATIC__/plugins/uploadify/uploadify.css" rel="stylesheet">
+<script src="__STATIC__/plugins/uploadify/jquery.uploadify.min.js"></script>
+<script>
+    $(function(){
+        var formObj = new Form('oauth_form');
+        var oauth_data = {:json_encode($oauth_data)};
+        formObj.init(oauth_data);
+
+        new Switchery(document.querySelector(".js-switch"), {color: "#1AB394"});
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+
+        /* 初始化上传插件 */
+        $("#upload_picture").uploadify({
+            "swf"             : "__STATIC__/plugins/uploadify/uploadify.swf",
+            "fileObjName"     : "logo",
+            "buttonText"      : "上传图片",
+            "uploader"        : "{:U('img_upload', array('file' => 'logo', 'session_id'=>session_id()))}",
+            "width"           : 120,
+            "height"          : 30,
+            'removeTimeout'   : 1,
+            'fileTypeExts'    : '*.jpg; *.png; *.gif;',
+            "onUploadSuccess" : uploadPicture
+        });
+        function uploadPicture(file, data, response) {
+            var data = $.parseJSON(data);
+            var src = '';
+            if(data.status){
+                $('#' + file.id).find('.data').html(' 上传完毕');
+                $('input[name=logo]').val(data.url.slice(1));
+                $('input[name=logo]').parent().find('.upload-img-box').html('<div class="upload-pre-item"><img src="' + data.url + '"/></div>');
+            } else {
+                alert(data.info);
+            }
+        }
+
+        $("#oauth_form").submit(function(){
+            return true;
+            $.post("{:U('oauth_update')}", $(this).serialize(), function(result){
+                if (result.status == 1) {
+                    alert(result.info);
+                    window.location.href = result.url;
+                } else {
+                    alert(result.info);
+                }
+            });
+            return false;
+        });
+    });
+</script>

@@ -1,0 +1,59 @@
+<style>
+.main_warp {text-align: center;}
+.error_h,.success_h {
+	display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #2CD46F;
+    color: #fff;
+    margin-top: 46px;
+    margin-bottom: 12px;
+    border-radius: 50%;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.41);
+    font-size: 3.5rem;
+}
+.error_h {
+	background-color: #E83A57;
+}
+.success,.error {
+    font-size: 1.8rem;
+}
+	.jump {
+		 margin-top: 52px;
+    font-size: 12px;
+    color: #9E9E9E;
+	}
+	.jump a {
+		color: #9E9E9E;
+	}
+</style>
+
+<div id="main" class="main_warp">
+<empty name="message">
+	<!-- <h1 class="error_h">:(</h1> -->
+	<i class="fa fa-close error_h"></i>
+	<p class="error">{$error}</p>
+	<else/>
+	<!-- <h1 class="success_h">:)</h1> -->
+	<i class="fa fa-check success_h"></i>
+	<p class="success">{$message}</p>
+</empty>
+
+<p class="jump">
+<b id="wait"><?php echo($waitSecond); ?></b>s后页面自动<a id="href" href="<?php echo($jumpUrl); ?>">跳转</a>
+</p>
+</div>
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</div>

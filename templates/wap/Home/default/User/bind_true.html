@@ -1,0 +1,29 @@
+<link href="__PUBLIC__/wap/Home/User/css/bind_true.css" type="text/css" rel="stylesheet" />
+
+<script>
+    var bind_true_url = '{:U("bind_true")}';
+</script>
+
+<div id="main" class="main_warp">
+    <div class="guide-wrap">
+        <div class="imghead">
+            <div style="float: left;">
+                <img src="{$oauth_user_info.headimgurl}" onerror="this.src = '__PUBLIC__/images/avatar/webwxgeticon.jpg'">
+                <span class="nickname">{$oauth_user_info.nickname|default="昵称"}</span>
+            </div>
+            <i class="fa fa-exchange"></i>
+           <div style="float: right;">
+                <img src="__PUBLIC__/{$userInfo.avatar}" onerror="this.src = '__PUBLIC__/images/avatar/taobao_null.jpg'">
+                <span class="nickname">{$userInfo.nickname|default="昵称"}</span>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="nickname-wrap">
+            <span class="desc">是否将该微信与五味真火通行证账号进行绑定？</span>
+        </div>
+        <a class="btn b-btn J_ping fast-reg" id="loginBtn" href="javascript:void(0)">立即绑定</a>
+        <span class="title bind-title">绑定后，您的微信帐号和五味真火通行证帐号都可以进行登录</span>
+    </div>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/bind_true.js"></script>

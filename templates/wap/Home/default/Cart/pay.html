@@ -1,0 +1,88 @@
+<link href="__PUBLIC__/wap/Home/Cart/css/pay.css" type="text/css" rel="stylesheet" />
+<script src="__PUBLIC__/wap/Home/Cart/js/pay.js?242434"></script>
+
+<php>
+	$jsApiParam = isset($jsApiParam) ? $jsApiParam : '';
+	$openid = isset($openid) ? $openid : '';
+</php>
+
+<script>
+	window.history.forward();
+	var end_time = '{$end_time}';
+	var now_time = '{:NOW_TIME}';
+	var jsApiParam = {$jsApiParam|json_encode};
+	var openid = '{$openid}';
+	var pay_url = '{:U("pay")}';							// 支付入口
+</script>
+
+<empty name="order">
+<else />
+<if condition="($order['status'] eq 0 || $order['status'] eq 10) && $order['pay_type'] eq 2">
+	<if condition="$order['status'] eq 10">
+		<php>
+			$pay_button_off = ' class="pay_button pay_button_off" disabled="disabled" ';
+		</php>
+		<p class="tt">订单已超时，请重新下单</p>
+	<elseif condition="$order['pay_status'] eq 1" />
+		<php>
+			$pay_button_off = ' class="pay_button pay_button_off" disabled="disabled" ';
+		</php>
+		<p class="tt">订单已支付哦</p>
+	<else/>
+		<php>
+			$pay_button_off = ' class="pay_button" ';
+		</php>
+		<p class="tt">支付剩余时间：<span id="tt"></span></p>
+		<script> GetRTime(); var s = setInterval(GetRTime, 1000);</script>
+	</if>
+<else/>
+	<php>
+	$pay_button_off = ' class="pay_button pay_button_off" disabled="disabled" ';
+	</php>
+	<p class="tt">订单状态错误(不满足支付条件)</p>
+</if>
+</empty>
+
+<div id="main" class="main_warp">
+	<empty name="order">
+	<else />
+	<div id="ord">
+		<div id="ord_info">
+			<h1>{$order.order_name}</h1>
+			<p><strong>订单单号：</strong>{$order.id}</p>
+			<p><strong>下单时间：</strong>{$order.create_time|date='Y-m-d H:i:s',###}</p>
+			<p><strong>支付金额：</strong>{$order.total}元</p>
+		</div>
+		<p class="_pay">请选择支付方式：</p>
+		<ul id="pay_type">
+			<li class="wx_on" onclick="pay_type(this,'wx')">微信支付</li>
+			<li class="ali" onclick="pay_type(this,'ALI_WAP')">支付宝</li>
+			<li class="un" onclick="pay_type(this,'un')">银行卡支付</li>
+		<ul>
+		<button {$pay_button_off} onclick="pay()" id="pay_button">立即支付</button>
+		<p class="note">提示：
+			<if condition="$t egt 0">
+				请尽快支付，超时订单将会自动关闭无法支付哦
+			<else/>
+				该订单已超时自动关闭，无法进行支付，请重新下单
+			</if>
+			<br />
+			说明：请在下单成功后的十五分钟内完成支付，否则订单将当作超时订单处理。
+		</p>
+	</div>
+	</empty>
+</div>
+
+<form action="" name="payForm" method="post">
+	<input name="order_id" type="hidden" value="{$order['id']}" />
+	<input name="channel" type="hidden" value="wx" />
+</form>
+
+<div id="toast_mask" class="sf_mask"></div>
+
+<div class="cs-toast" id="toast" style="display: none;">
+	<div class="cs-toast-text">
+		<span class="cs-toast-icon cs-icon" cs-mode="toast-loading"></span>
+		加载中
+	</div>
+</div>

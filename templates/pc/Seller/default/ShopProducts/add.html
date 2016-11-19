@@ -1,0 +1,133 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加商店餐品</h5>
+                </div>
+                <div class="ibox-content">
+                    <form name="products_form" method="post" class="form-horizontal" action="">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属店铺</label>
+                            <div class="col-sm-5">
+                                <div class="input-group" style="width: 300px;">
+                                    <input type="hidden" name="shop_id">
+                                    <input type="text" class="form-control" id="shop_name">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">所属店铺分类</label>
+                            <div class="col-sm-5">
+                                <select class="form-control" name="shop_category_id">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <input type="hidden" name="img" value="" />
+                            <label class="col-sm-2 control-label">图片</label>
+                            <div class="col-sm-6">
+                                <div class="uploader-list" id="fileList"></div>
+                                <div id="filePicker" class="filePicker"><i class="fa fa-cloud-upload"></i></div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">描述</label>
+                            <div class="col-sm-5">
+                                <textarea type="textarea" class="form-control" name="describe">这是描述</textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">价格</label>
+                            <div class="col-sm-5">
+                                <div class="input-group"><span class="input-group-addon">¥</span>
+                                    <input type="text" class="form-control" name="price"> <span class="input-group-addon">元</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">每日库存</label>
+                            <div class="col-sm-5">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="inventory"> <span class="input-group-addon">件</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">单位</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="unit" value="份">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" name="sort">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">是否上架</label>
+                            <div class="col-sm-5">
+                                <input type="checkbox" class="js-switch" name="status" value="1" />
+                            </div>
+                        </div>
+
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">保存</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="__PUBLIC__/js/webuploader/uploader.js"></script>
+
+<script src="__H__/js/plugins/suggest/bootstrap-suggest.min.js"></script>
+
+<script src="__PUBLIC__/pc/Seller/ShopProducts/js/add.js"></script>
+
+<script>
+    var get_shop_url = '{:U("shop_products_category/get_shop")}';                       // 获取商店接口
+    var get_category_call_json_url = '{:U("shop_products_category/get_category_call_json")}';   // 获取数据接口
+    var products_add_url = '{:U("shop_products/add")}';                                     // 添加产品接口
+    var img_upload_url = '{:U("shop_products/img_upload")}';                                     // 图片上传接口
+</script>

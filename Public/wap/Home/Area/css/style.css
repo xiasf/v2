@@ -1,0 +1,137 @@
+/**
+ * 选择地址页面样式
+ * update：2016-4-4 10:57:12
+ */
+
+ .geo-search {
+ 	margin-top: 10px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    position: relative;
+    padding: 10px;
+}
+
+.geo-search-input{
+	display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px 4px;
+    background: #f2f2f2;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    font-family: '微软雅黑';
+}
+.geo-search-btn {
+	display: block;
+    width: 100%;
+    padding: 10px 0;
+    background: #E83A57;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    -webkit-transition: color .4s;
+    transition: color .4s;
+    font-size: 1.6rem;
+    color: #fff;
+    font-family: inherit;
+}
+.geo-search-btn-on {background:#A9A9A9;}
+
+#area_list>:first-child {border: 0;}
+
+.geo-search-result {
+	padding: 10px;
+    border-top: 1px solid #eee;
+    display: block;
+    color: #08c;
+    background: #fff;
+    position: relative;
+}
+
+.geo-search-result .on_address {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    background-color: #D4D4D4;
+    color: #fff;
+    padding: 4px;
+    font-size: 1.2rem;
+    bottom: 0;
+    height: 20px;
+    margin: auto;
+    line-height: 20px;
+}
+
+.gsr-detail>.spot{
+	margin: 0;
+    color: #333;
+    font-size: 1.5rem;
+}
+
+.gsr-detail>.address {
+	margin: 0;
+    font-size: 1.3rem;
+    color: #999;
+}
+    
+.geo-search-empty {
+	margin-top: 10px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    padding: 10px;
+    color: #666;
+    font-size: 1.5rem;
+}
+
+#history_address_list {
+    position: relative;
+}
+
+#history_address_list .title {
+    padding: 5px 0 4px 10px;
+    margin-top: 20px;
+    background-color: #ECECEC;
+    border-top: 1px #D4D4D4 solid;
+}
+
+#history_address_list .fa {
+    margin-right: 3px;
+}
+
+#history_address_list #history_clean {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 31px;
+    width: 60px;
+    line-height: 31px;
+    text-align: center;
+    border-radius: 16px;
+    color: #8E0000;
+}
+
+#history_address_list #get_location {
+    position: absolute;
+    top: 0;
+    right: 70px;
+    color: #000;
+    height: 31px;
+    width: 60px;
+    line-height: 31px;
+    text-align: center;
+}
+
+#history_address_list #get_location_btn {
+    margin: 15px 0;
+    background-color: #565656;
+    padding: 10px;
+    color: #fff;
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+    font-size: 1.5rem;
+}

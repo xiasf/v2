@@ -1,0 +1,132 @@
+/**
+ * 用户中心 页面样式
+ * update：2016-6-19 16:01:58
+ */
+
+ .profile-info-block {
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+}
+
+.profile-info-block .info-box {
+    background: #3199e8;
+    padding: 15px;
+    color: #fff;
+}
+
+.profile-info-block .info-box img {
+    float: left;
+    border-radius: 50%;
+    width: 58px;
+    height: 58px;
+}
+
+.profile-info-block .info-box .icon-arrow-right {
+    margin-top: 20px;
+    color: #fff;
+    float: right;
+}
+
+span.icon-arrow-right {
+    font-size: 18px;
+    color: #ddd;
+}
+
+[class*=" icon-"], [class^=icon-] {
+    vertical-align: middle;
+    line-height: 1;
+}
+
+.profile-info-block .info-box {
+    background: #3199e8;
+    padding: 42px 15px 56px 25px;
+    color: #fff;
+    background-image: url('/public/images/bg/gg.jpg');
+    background-size: cover;
+    position: relative;
+}
+
+.info-box img,.info-box div,.info-box p {
+	position: relative;
+	z-index: 2;
+}
+
+.info-box:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.profile-info-block .info-box .info-name {
+    margin: 0 10px 0 75px;
+}
+
+.profile-info-block .info-box .info-name p:first-child {
+    font-size: 22px;
+}
+
+.profile-info-block .info-box .info-name p {
+    margin-bottom: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.profile-info-block .info-data {
+	    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.profile-info-block .info-data .data-item:first-child, .profile-info-block .info-data .data-item:nth-of-type(2) {
+    border-right: 1px solid #ddd;
+}
+
+.profile-info-block .info-data .data-item {
+box-sizing: border-box;
+    padding-bottom: 16px;
+    text-align: center;
+    width: 100%;
+    padding-top: 16px;
+    -webkit-box-flex: 1;
+}
+
+.bindmobile-inputs, .delivery-list, .geo-cities-wrapper, .geo-search, .geo-search-empty, .geo-search-results, .hongbao-exchange-form, .logreg-inputs, .trade-block, .ui-block, .ui-padding-block {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+}
+
+.profile-base-block .mock-title {
+    border-bottom: 1px solid #ddd;
+    padding: 11px 10px;
+}
+
+.mock-title {
+    border: 0;
+    display: block;
+    color: #333;
+}
+
+.tblock-title {
+    margin: 0;
+    padding: 10px;
+    font-size: 1.05rem;
+}
+
+.tblock-title, .trade-report {
+    border-bottom: 1px solid #eee;
+    line-height: 1;
+    font-weight: 400;
+}
+
+.profile-base-block {
+    border-bottom: none;
+}

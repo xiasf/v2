@@ -1,0 +1,85 @@
+<div class="wrapper wrapper-content animated bounceInRight">
+	<div class="row">
+		<div class="col-sm-12">
+		    <div class="ibox float-e-margins">
+		      	<div class="ibox-title">
+		        	<h5>商店&nbsp;-&nbsp;分类管理</h5>
+		      	</div>
+		      	<div class="ibox-content">
+			        <div class="row m-b-sm m-t-sm">
+			          	<div class="col-sm-12">
+				            <div class="alert alert-warning">
+				            	<strong>操作说明：</strong>
+				              	<ol>
+				               		<li>上下拖动可改变排序，左右拖动可改变级别（系统限制最高不超过两级——暂不超过一级）</li>
+				               		<li>新添加的分类在列表的最后，需要注意的是：在未保存之前，无法为其设置子级</li>
+				               		<li>改变分类排序、分类级别和新建分类需点击保存才能生效，但删除和修改分类名称是立即生效的</li>
+				               		<li>只能将一个分类拖动为另一个分类的子级，而不能直接将其拖动成为另一个分类的父级，请灵活使用拖动功能</li>
+				              	</ol>
+				            </div>
+			          	</div>
+
+			          	<div class="col-sm-4">
+			                <select class="form-control inline" id="shop">
+			                   	<option value="1">快餐</option>
+                                <option value="2">烧烤</option>
+                                <option value="3">烧烤半成品</option>
+                                <option value="4">水果超市</option>
+			                </select>
+		                </div>
+
+			            <div class="col-md-4">
+			              	<div class="input-group">
+				                <input type="text" placeholder="请输入分类名称" class="form-control" name="catName">
+				                <span class="input-group-btn">
+				                	<button type="button" class="btn btn-primary" id="add_btn"><i class="fa fa-plus"></i>&nbsp;添加分类</button>
+				                </span>
+			            	</div>
+			            </div>
+				        <div class="col-md-4">
+				            <button type="button" class="btn btn-danger" id="save_btn" disabled>保存分类设置</button>
+				            &nbsp;&nbsp;
+				            <button type="button" class="btn btn-white expand-all" disabled>展开所有</button>
+				            &nbsp;&nbsp;
+				            <button type="button" class="btn btn-white collapse-all" disabled>收起所有</button>
+				        </div>
+				    </div>
+				    <div class="hr-line-dashed"></div>
+				    <div class="row m-b-sm m-t-sm">
+						<div class="col-sm-12">
+							<!-- 加载…… -->
+							<div class="alert alert-success">
+				            	<div class="sk-spinner sk-spinner-circle fa" style="vertical-align: bottom;">
+	                                <div class="sk-circle1 sk-circle"></div>
+	                                <div class="sk-circle2 sk-circle"></div>
+	                                <div class="sk-circle3 sk-circle"></div>
+	                                <div class="sk-circle4 sk-circle"></div>
+	                                <div class="sk-circle5 sk-circle"></div>
+	                                <div class="sk-circle6 sk-circle"></div>
+	                                <div class="sk-circle7 sk-circle"></div>
+	                                <div class="sk-circle8 sk-circle"></div>
+	                                <div class="sk-circle9 sk-circle"></div>
+	                                <div class="sk-circle10 sk-circle"></div>
+	                                <div class="sk-circle11 sk-circle"></div>
+	                                <div class="sk-circle12 sk-circle"></div>
+	                            </div>
+				            	&nbsp;&nbsp;加载中……
+				            </div>
+					        <div class="dd" id="nestable_wrapper"></div>
+					        <textarea disabled title="作为调试用，不用理会这里" id="allcat" class="form-control" style="display:none"></textarea>
+				        </div>
+				    </div>
+			    </div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+<script src="__H__/js/plugins/nestable/jquery.nestable.js"></script>
+<script>
+	var get_category_call_json_url = '{:U("cloud_products_category/get_category_call_json")}';						// 获取数据接口
+	var del_url = '{:U("cloud_products_category/del")}';														// 删除分类数据接口
+	var update_name_url = '{:U("cloud_products_category/update_name")}';											// 更新分类名称接口
+	var category_edit_url = '{:U("cloud_products_category/category_edit")}';										// 保存接口
+</script>
+<script src="__PUBLIC__/pc/S/CloudProductsCategory/js/index.js"></script>

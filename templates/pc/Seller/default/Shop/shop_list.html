@@ -1,0 +1,272 @@
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>分店列表<span class="label label-primary pull-right">{$shop_count}</span></h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-3 hide">
+                            <div data-toggle="buttons-checkbox" class="btn-group">
+                                <button class="btn btn-primary active" type="button" aria-pressed="true">全部(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="false">营业(12)</button>
+                                <button class="btn btn-primary" type="button" aria-pressed="true">关闭(12)</button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 pull-right">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-white dropdown-toggle" type="button" aria-expanded="false">名称&nbsp;<span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="form_basic.html#">地址</a>
+                                            </li>
+                                            <li><a href="form_basic.html#">负责人姓名</a>
+                                            </li>
+                                            <li><a href="form_basic.html#">手机号码</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li><a href="form_basic.html#">其它</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <input type="text" placeholder="搜索很简单^_^" class="form-control">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;搜索</button></span>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="hr-line-dashed"></div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th><input class="checkbox-inline i-checks" type="checkbox"></th>
+                                <th>分店名称</th>
+                                <th>经营类型</th>
+                                <th>类别</th>
+                                <th>地址</th>
+                                <th>检查</th>
+                                <!-- <th>负责人</th> -->
+                                <!-- <th>负责人电话</th> -->
+                                <!-- <th>排序</th> -->
+                                <th>状态</th>
+                                <th>营业状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name="shop_list" item="shop">
+								<tr>
+                                    <td>
+                                        <input class="checkbox-inline i-checks" type="checkbox" value="{$shop.id}" name="id[]">
+                                    </td>
+                                    <td><img class="m-r" src="{:thumb($shop['logo'],50,50)}">{$shop.shop_name}</td>
+                                    <td><eq name="shop.shop_business_type" value="1"><span class="label label-primary">平台</span><else/>
+                                        <!-- <span class="label label-danger">第三方</span> -->
+                                        <img class="m-r" src="{:thumb($shop['seller_logo'],50,50)}">{$shop.seller_name}
+                                    </eq></td>
+                                    <td>{:get_shop_type($shop['shop_type'])}</td>
+                                    <td>{$shop.address}<if condition="$shop['address_reference']">&nbsp;（{$shop['address_reference']}旁）</if></td>
+                                    <td class="baidu_load" data-id="{$shop.id}"></td>
+                                    <!-- <td>{$shop.name}</td> -->
+                                    <!-- <td>{$shop.mobile}</td> -->
+                                    <!-- <td>{$shop.sort}</td> -->
+                                    <td><eq name="shop.status" value="1"><span class="label label-primary">正常</span><else/><span class="label label-danger">待审核</span></eq></td>
+                                    <td><eq name="shop.business_status" value="1"><span class="label label-primary">营业中</span><else/><span class="label label-danger">休息中</span></eq></td>
+                                    <td>
+                                        <a href="{:U('shop/update', array('id' => $shop['id']))}" class="btn btn-white btn-sm"><i class="fa fa-edit"></i>&nbsp;修改</a>&nbsp;&nbsp;
+                                        <a href="javascript:void(0)" onclick="print_config({$shop.id})" class="btn btn-white btn-sm"><i class="fa fa-print"></i>&nbsp;打印配置</a>&nbsp;&nbsp; 
+                                        <a href="javascript:void(0)" onclick="shop_del({$shop.id})" class="btn btn-white btn-sm"><i class="fa fa-times-circle"></i>&nbsp;删除</a>
+                                    </td>
+                                </tr>
+							</foreach>
+
+                        </tbody>
+
+                        <tfoot>
+                        	<tr>
+                        		<td colspan="9"><div class="pull-right">{$page_show}</div></td>
+                        	</tr>
+                        </tfoot>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="tpl_printer_list" type="text/html">
+{{if list.length > 0}}
+    {{each list as item}}
+    <div class="col-md-3">
+        <div class="widget style1 red-bg">
+            <div class="row vertical-align">
+                <div class="col-xs-3">
+                    <i class="fa fa-print fa-2x"></i>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <h5 class="font-bold">{{item.printname}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+{{else}}
+<div class="alert alert-danger alert-dismissable">
+    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    该店铺还没有绑定打印机哦
+</div>
+{{/if}}
+</script>
+
+<script id="tpl_print_config" type="text/html">
+    <div id="print_config" class="ibox-content">
+        <div class="row m-b-sm m-t-sm">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <input type="text" placeholder="请输入打印机ID" class="form-control" name="printer_id">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-primary" id="bind_printer_btn">绑定打印机</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="hr-line-dashed"></div>
+        <div id="printer_list" class="row m-b-sm m-t-sm"></div>
+    </div>
+</script>
+
+<script>
+    $(function(){
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});
+
+        function baidu_load(_this) {
+            _this.html('<span class="badge badge-danger"><i class="fa fa-refresh fa-spin"></i></span>');
+            _this.attr('title', '检查中……');
+            _this.prev().css('color', '#C5C5C5');
+            $.getJSON('{:U("baidu_load")}'+'?'+Math.random(), {shop_id:_this.data('id')}, function(result){
+                _this.prev().css('color', '');
+                if (result.status == 1) {
+                    _this.html('<span class="badge badge-primary"><i class="fa fa-check"></i></span>');
+                    _this.attr('title', '远程地图数据正常！');
+                } else {
+                    _this.html('<span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i></span>');
+                    _this.attr('title', '远程地图数据异常！');
+                }
+            });
+        }
+        $('.baidu_load').each(function(){
+            baidu_load($(this));
+            $(this).click(function(){
+                baidu_load($(this));
+            });
+        });
+    });
+
+
+    // 删除商店
+    function shop_del(shop_id) {
+        top.layer.confirm("你确定要删除此商店吗？<br>注意，删除操作不可还原", function(){
+            top.layer.msg("正在删除……",{time:0,shade: [0.8, '#393D49']});
+            $.post('{:U("trur_delete")}', {id:shop_id}, function(result){
+                if (result.status == 1) {
+                    top.layer.msg(result.info, {
+                        shadeClose: true,
+                        shade: [0.3, '#000'],
+                        time: 1000,
+                    }, function(){
+                        window.location.reload();
+                    });
+                } else {
+                    top.layer.msg(result.info, {time: 1000});
+                }
+            });
+        });
+    }
+
+
+    // 商店打印配置
+    function print_config(shop_id) {
+        layer.tab({
+            area: ['900px', '500px'],
+            tab: [{
+                title: '打印机管理',
+                content: $('#tpl_print_config').html()
+            }, {
+                title: '打印设置',
+                content: '2'
+            }]
+        });
+        get_printer_list(shop_id);
+        get_print_config(shop_id);
+    }
+
+    // 获取打印机列表
+    function get_printer_list(shop_id) {
+        $('#bind_printer_btn').click(function(){
+            bind_printer(shop_id);
+        });
+        $('#printer_list').html('<span class="badge badge-danger"><i class="fa fa-refresh fa-spin"></i></span>');
+        $.getJSON('{:U("get_printer_list")}'+'?'+Math.random(), {shop_id:shop_id}, function(result){
+            var html = template('tpl_printer_list', {'list':result});
+            $('#printer_list').html(html);
+        });
+    }
+
+    // 绑定打印机
+    function bind_printer(shop_id) {
+        var printer_id = $('input[name=printer_id]').val().trim();
+        top.layer.msg("正在绑定……",{time:0,shade: [0.8, '#393D49']});
+        $.post('{:U("bind_printer")}'+'?'+Math.random(), {shop_id:shop_id, printer_id:printer_id}, function(result){
+            if (result.status == 1) {
+                top.layer.msg(result.info,{time:1000});
+                get_printer_list(shop_id);
+            } else {
+                top.layer.msg(result.info,{time:1000});
+            }
+        }, 'json');
+    }
+
+    
+    // 解绑打印机
+    function unbundling_printer(shop_id, printer_id) {
+        top.layer.msg("正在解绑……",{time:0,shade: [0.8, '#393D49']});
+        $.post('{:U("unbundling_printer")}'+'?'+Math.random(), {shop_id:shop_id, printer_id:printer_id}, function(result){
+            if (result.status == 1) {
+                top.layer.msg(result.info,{time:1000});
+                get_printer_list(shop_id);
+            } else {
+                top.layer.msg(result.info,{time:1000});
+            }
+        }, 'json');
+    }
+
+    // 获取打印设置
+    function get_print_config(shop_id) {
+    }
+
+
+    // 打印机状态检测
+    function printer_check(_this) {
+        _this.html('<span class="badge badge-danger"><i class="fa fa-refresh fa-spin"></i>&nbsp;检查中…</span>');
+        $.getJSON('{:U("printer_check")}'+'?'+Math.random(), {id:_this.parent().children(":first").html()}, function(result){
+            if (result.status == 1) {
+                _this.html('<span class="badge badge-primary"><i class="fa fa-check"></i>&nbsp;'+result.info+'</span>');
+            } else {
+                _this.html('<span class="badge badge-warning"><i class="fa fa-exclamation-triangle"></i>&nbsp;'+result.info+'</span>');
+            }
+        });
+    }
+    // $('.printer_check').each(function(){
+    //     printer_check($(this));
+    //     $(this).click(function(){
+    //         printer_check($(this));
+    //     });
+    // });
+
+</script>

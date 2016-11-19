@@ -1,0 +1,56 @@
+<script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+
+<div class="middle-box text-center loginscreen">
+    <div>
+        <div>
+            <h1 class="logo-name">S</h1>
+        </div>
+        <h3>五味真火通行证登陆</h3>
+        <form class="m-t" id="dl_form" role="form" method="post" action="">
+            <input type="hidden" name="redirectURL" value="{$redirectURL}">
+            <div class="form-group">
+                <input type="tel" name="mobile" class="form-control" placeholder="手机号/会员名/邮箱" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="密码" required="">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+            </p>
+        </form>
+    </div>
+</div>
+<script>
+    $(function(){
+        $("#dl_form").submit(function(){
+return;
+            if (!$('#dl_form input[name="mobile"]').val()) {
+              alert('手机号码必填！');
+              return;
+            }
+
+            if (!$('#dl_form input[name="password"]').val()) {
+              alert('密码必填！');
+              return;
+            }
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "{:U('login')}",
+                data: $('#dl_form').serialize(),
+                success: function (result) {
+                    if (result.status == 1) {
+                        alert(result.info);
+                        window.location.href = result.url;
+                    } else {
+                        alert(result.info);
+                    }
+                },
+                error: function(result) {
+                    alert("error:"+result.responseText);
+                }
+            });
+            return false;
+        });
+    });
+</script>

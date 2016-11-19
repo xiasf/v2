@@ -1,0 +1,96 @@
+
+<link href="__STATIC_4/css/remindorder.css?t=2016129005129" type="text/css" rel="stylesheet" />
+
+<div id="main" class="main_warp">
+	<div id='path_t'>
+		<input placeholder="请输入手机号码查询" type="search" id="phone" onkeydown="xiak()" />
+		<input type="submit" value="查询" id="ss" onclick="sbim()" />
+	</div>
+	<div id="order"></div>
+	<div class="clear"></div>
+</div>
+
+<script id="tpl_order" type="text/html">
+	{{each order_list as item}}
+		<div class="order_item">
+			<div class="order_item_h">
+				<a class="order_item_h_name" href="#">{{item.order_name}}</a>
+				<span class="order_item_h_id">
+					<strong class="srtong">订单单号：</strong>{{item.id}}
+				</span>
+				{{if item.pay_type == 2}}
+				<span class="order_item_h_i">
+					<strong class="srtong">订单状态：</strong>{{if item.pay_status == 1}}已支付{{else}}待支付{{/if}}
+				</span>
+				{{else}}
+				<span class="order_item_h_i">
+					<strong class="srtong">订单状态：</strong>——
+				</span>
+				{{/if}}
+				<span class="order_item_h_zf">
+					<strong class="srtong">支付方式：</strong>{{if item.pay_type == 1}}餐到付款{{else}}在线支付{{/if}}
+				</span>
+				<span class="order_item_h_t">
+					<strong class="srtong">下单时间：</strong>{{item.create_time}}
+				</span>
+			</div>
+			<div class="order_item_m_h">
+				<ul class="order_item_m_ul">
+					<li>
+						<span class="c_n">
+							<strong>数量：{{item.product_num}}份</strong>
+						</span>
+						<span class="c_mm">
+							<strong>合计：{{item.total}}元</strong>
+						</span>
+					</li>
+				{{each item.item as item_detail}}
+					<li>
+						<span class="c_name_">{{item_detail.product_name}}</span>
+						<span class="c_n_">{{item_detail.product_num}}{{item_detail.specifications}}
+						</span>
+						<span class="c_mm_">{{item_detail.summary}}</span>
+					</li>
+				{{/each}}
+				</ul>
+			</div>
+			<div class="order_item_m_w">
+				<span class="n_address">
+					<strong class="srtong">地址：</strong>{{item.address}}
+				</span>
+				<span class="n_note">
+					<strong class="srtong">备注：</strong>{{item.note}}
+				</span>
+				<span class="n_name">
+					<strong class="srtong">姓名：</strong>{{item.user_name}}
+				</span>
+				<span class="n_phone">
+					<strong class="srtong">手机：</strong>{{item.mobile}}
+				</span>
+			</div>
+		</div>
+	{{/each}}
+</script>
+
+<script>
+$(function(){
+	// layer.open({
+ //        type: 2,
+ //        shadeClose: false,
+ //    });
+	
+	var mobile = $.cookie('cart_mobile');
+	$('#phone').val(mobile);
+
+	$.getJSON("{:U('get_remindorder')}", {mobile: mobile}, function(result){
+		var html = template('tpl_order', {'order_list':result});
+		$('#order').html(html);
+	});
+
+
+});
+</script>
+
+<script src="__PUBLIC__/plugins/artTemplate/dist/template.js"></script>
+
+<!-- <script src="__STATIC_4/js/remindorder.js?t=2016129005129"></script> -->

@@ -1,0 +1,237 @@
+/**
+ * 确认下单页面样式
+ * update：2016-4-3 16:03:20
+ */
+
+#main {
+	position: absolute;
+	width: 100%;
+	height: calc(100% - 40px);
+	overflow: overlay;
+}
+
+#main:after {
+	content: '';
+	height: 52px;
+	display: block;
+}
+
+.wrap {
+	background-color: #fff;
+    margin: 10px 0;
+    padding: 15px;
+}
+
+#area_wrap {
+    background: linear-gradient(#FFF, #FFF) padding-box, repeating-linear-gradient(-45deg, #FB8888 0, #FB8888 12.5%, #FFF 0, #FFF 25%, #85C2EC 0, #85C2EC 37.5%, #FFF 0, #FFF 50%) 0 / 71px 81px;
+    border-width: 5px 0 0 0;
+    border-color: rgba(0, 0, 0, 0);
+    border-style: solid;
+    padding-top: 0;
+}
+
+#area_wrap label {
+    display: block;
+	position: relative;
+}
+
+#area_wrap label .ico {
+	position: absolute;
+    top: 19px;
+	left: 0;
+	color: #828282;
+}
+
+#area_wrap label .fa-map-marker { top: 12px; color: #E83A57;}
+#area_wrap label .fa-mobile-phone { top: 12px}
+
+#area_wrap input {
+	font-size: 1.5rem;
+    border: 1px #ddd solid;
+    position: relative;
+    font-family: '微软雅黑';
+    background: rgba(0, 0, 0, 0);
+    color: #636363;
+    width: 100%;
+    padding: 15px 6px;
+    border-width: 1px 0;
+    box-sizing: border-box;
+	padding-left: 22px;
+}
+
+#area_wrap label:nth-last-child(3) input {border-top-color: #E83A57;}
+
+#area_wrap label:nth-last-child(2) input,#area_wrap label:nth-last-child(4) input { border: 0;}
+
+#products_list {
+    padding-bottom: 6px;
+    padding-top: 10px;
+}
+
+#products_list .title {
+    padding-bottom: 7px;
+    border-bottom: 1px #E83A57 solid;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+#products_list ul li {
+	margin-bottom: 10px;
+    border-bottom: 1px #E8E8E8 dashed;
+	position: relative;
+}
+
+#products_list ul li:nth-child(1) {
+	border-bottom-style: solid;
+}
+
+#products_list ul li:nth-child(1) .price:before,#products_list ul li:nth-child(1) .summary:before {
+	content: '';
+}
+
+#products_list ul li:nth-child(1) .num {
+	border: 0;
+}
+
+#products_list ul li:nth-last-child(1) {
+    margin: 0;
+    border: 0;
+}
+
+#products_list ul li span {
+	width: 100px;
+	display: inline-block;
+    margin-right: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#products_list ul li .num {
+    width: 35px;
+    text-align: center;
+    border: 1px #BDBDBD solid;
+    padding: 3px 0px;
+    border-radius: 4px;
+    margin-right: 10px;
+    position: absolute;
+    right: 104px;
+    display: inline-block;
+    top: -2px;
+}
+
+#products_list ul li .summary {
+	float: right;
+	margin: 0;
+}
+
+#products_list ul li .price,#products_list ul li .summary {
+	width: 50px;
+}
+
+
+#products_list ul li .price:before,#products_list ul li .summary:before {
+	content: '￥';
+}
+
+#pay_type .title {
+    padding-bottom: 12px;
+    text-align: left;
+    border-bottom: 1px #E83A57 solid;
+    font-size: 1.5rem;
+}
+
+#pay_type .title .fa {
+	color: #E83A57;
+    font-size: 2.4rem;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+#pay_type .fa {
+	margin-right: 10px;
+    font-size: 2.8rem;
+    vertical-align: middle;
+}
+
+
+#pay_type .pay .fa-check-circle {
+	color: #1CD085;
+    /*font-size: 1.8rem;*/
+}
+
+#pay_type .pay .fa-circle-o {
+	color: #CCC;
+}
+
+#ok_ico {
+    color: #1CD085;
+    font-size: 2.8rem;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+#pay_type .pay {
+    padding: 12px 0;
+    font-size: 1.5rem;
+    border-bottom: 1px #ddd solid;
+    position: relative;
+    color: #737373;
+}
+
+#pay_type .pay.on {
+    color: #000;
+}
+
+#pay_type .pay .pay_hot {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    color: #F00;
+}
+#pay_type .pay .pay_note {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    color: #C5C5C5;
+}
+
+#checkout_wrap {
+	z-index: 1;
+	position: fixed;
+	display: block;
+	width: 100%;
+	bottom: 0;
+}
+
+#checkout {
+	float: left;
+	width: 65%;
+	padding: 0;
+	height: 52px;
+	border-radius: 0;
+	box-shadow: none;
+	line-height: 52px;
+	text-align: left;
+	color: #fff;
+	background: rgba(0, 0, 0, 0.82);
+	text-indent: 10px;
+}
+
+#cart_num,#cart_total {margin-right: 10px;}
+#cart_num:before {content: '共'}
+#cart_num:after {content: '份'}
+#cart_total:before {content: '应付：'}
+#cart_total:after {content: '元'}
+
+#submit_button {
+	width: 35%;
+	left: 0;
+	box-shadow: none;
+	border-radius: 0;
+	background-color: #616161;
+	height: 52px;
+	font-size: 1.6rem;
+	float: right;
+	border: 0;
+	color: #fff;
+	font-family: '微软雅黑';
+}

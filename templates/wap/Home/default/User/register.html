@@ -1,0 +1,32 @@
+<link href="__PUBLIC__/wap/Home/User/css/register.css" type="text/css" rel="stylesheet" />
+
+<script>
+    var sms_code_url = '{:U("send_sms")}';
+    var register_url = '{:U("register")}';
+</script>
+
+<div id="main" class="main_warp">
+    <section class="page">
+        <div class="wrap regPage">
+            <div class="input-box">
+                <div class="input-container">
+                    <label for="mobile"><i class="fa fa-mobile-phone fa-2x"></i></label>
+                    <input type="tel" id="mobile" name="mobile" class="acc-input telphone txt-input" placeholder="请输入手机号">
+                </div>
+                <button data-mescode="true" class="mesg-code mesg-disable">获取短信确认码</button>
+            </div>
+            <div class="input-container">
+                <label for="smsCode"><i class="fa fa-font fa-2x"></i></label>
+                <input id="smsCode" name="smsCode" class="acc-input txt-input" type="text" placeholder="请输入短信确认码" autocomplete="off">
+            </div>
+            <div class="input-container">
+                <label for="password"><i class="fa fa-lock fa-2x"></i></label>
+                <input id="password" name="password" type="password" class="acc-input password txt-input" placeholder="请设置6-20位登录密码" autocomplete="off">
+            </div>
+            <a href="javascript:;" id="regBtn" class="btn btn-active">注 册</a>
+            <p class="reg-notice">已有账号？<a href="{:U('login')}">立即登陆</a></p>
+        </div>
+    </section>
+</div>
+
+<script src="__PUBLIC__/wap/Home/User/js/register.js"></script>

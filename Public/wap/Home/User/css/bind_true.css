@@ -1,0 +1,118 @@
+/**
+ * 关联账号页面样式
+ * update：2016-4-3 16:03:20
+ */
+
+ .guide-wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 20px 10px;
+    font-size: 14px;
+}
+
+.imghead {
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.imghead i {    
+    position: absolute;
+    top: -25px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    color: #843E1B;
+    width: 20px;
+    height: 20px;
+}
+
+.imghead div {
+    width: 10rem;
+}
+
+.imghead img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -moz-border-radius: 100px;
+    display: block;
+    margin: 0 auto;
+    /*border: rgba(255,255,255,0.3) solid 5px;*/
+    /*border: #fff solid 6px\9;*/
+    /*-webkit-box-shadow: 0 1px 2px #A7A7A7;*/
+}
+
+.nickname-wrap {
+    margin-bottom: 20px;
+    color: #333;
+    margin-top: 10px;
+}
+
+.title {
+    line-height: 20px;
+    color: #848689;
+}
+
+.nickname {
+    font-size: 16px;
+    padding: 0 8px;
+    display: inline-block;
+    margin: 5px;
+    color: #41E282;
+    /*border: 1px #46CE8F solid;*/
+    /*border-width: 0 0 1px 0;*/
+}
+
+.desc {
+    display: block;
+    line-height: 30px;
+}
+
+.enter-title {
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.fast-reg {
+    border: 1px solid #f23030;
+}
+
+.b-btn {
+    font-size: 14px;
+    line-height: 40px;
+}
+
+.btn {
+    -webkit-border-radius: 4px;
+    background-color: #E83A57;
+    color: #fff;
+    background: linear-gradient(to bottom,#FF6C85 0,#E83A57 100%);
+    margin: 0 auto;
+    padding: 0 10px;
+    text-align: center;
+    display: block;
+}
+
+.bind-title {
+    margin-top: 43px;
+}
+
+.bind-title {
+    margin-top: 35px;
+    margin-bottom: 10px;
+    display: block;
+    line-height: normal;
+    height: 25px;
+}
+
+.bind {
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #6a6a6a;
+    line-height: 38px;
+}

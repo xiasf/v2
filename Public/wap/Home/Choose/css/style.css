@@ -1,0 +1,239 @@
+/**
+ * 选择餐品页面样式
+ * update：2016-3-25 03:00:08
+ */
+
+#sf_main {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: hidden;
+}
+
+#cat_list_wrap {
+    width: 25%;
+    position: absolute;
+    overflow: overlay;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#products_list_wrap {
+    width: 75%;
+    overflow: auto;
+    height: 100%;
+    position: absolute;
+    left: 25%;
+}
+
+
+/* 左侧分类栏部分 */
+#cat_list{
+    /*width: 25%;*/
+    background: #f7f7f7;
+    /*float: left;*/
+}
+#cat_list li {
+    padding: 15px 5px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #ddd;
+}
+#cat_list li a {
+    display: inline;
+    color: #666;
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+#cat_list li span {
+    color: #B8B8B8;
+    font-size: 1.2rem;
+}
+
+
+
+/* 右侧餐品列表栏部分 */
+#products_list {
+/*    width: 75%;
+    float: left;*/
+}
+
+#products_list .products_info {
+    position: relative;
+}
+
+#products_list h3 {
+    text-align: left;
+    margin: 0;
+    color: #fff;
+    padding: 10px 0 10px 10px;
+    font-weight: normal;
+    font-size: 1.3rem;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.19);
+    text-shadow: 2px 2px 5px #3D3D3D;
+}
+
+#products_list h3 span {
+    margin-left: 5px;
+}
+
+#products_list .h_bg {
+    background-size: cover;
+    background-position: center;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    -webkit-filter: blur(2px);
+}
+
+#products_list li {
+    background: #fff;
+    overflow: hidden;
+    position: relative;
+    height: 70px;
+    padding: 10px;
+    color: #000;
+    font-size: 1.5rem;
+    cursor: default;
+    letter-spacing: 0.5px;
+    border-bottom: 1px rgba(0, 0, 0, 0.12) solid;
+}
+
+#products_list li:nth-last-child(1) {
+    border: 0;
+}
+
+#cat_list_wrap:after {
+    content: '';
+    height: 44px;
+    display: block;
+}
+
+#products_list_wrap:after {
+    content: '';
+    height: 44px;
+    display: block;
+}
+
+
+#products_list .l {float: left;}
+#products_list .r {
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 23px;
+}
+#products_list .hide {display: none;}
+#products_list .img {float: left;width: 70px;height: 70px;}
+#products_list .name {
+    color: #505050;
+    float: left;
+    width: 120px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0;
+    margin: 0 0 0 10px;
+    font-size: 1.4rem;
+}
+#products_list .price {
+    position: absolute;
+    top: 60px;
+    left: 101px;
+    color: #FF2F3E;
+    font-size: 1.8rem;
+}
+#products_list .sales {
+    position: absolute;
+    top: 38px;
+    left: 91px;
+    color: #6B6B6B;
+    font-size: 1.2rem;
+}
+#products_list .price:before {
+    content: "\00a5";
+    position: absolute;
+    top: 4px;
+    left: -10px;
+    font-size: 1.2rem;
+    font-family: '微软雅黑';
+}
+
+/* 右侧按钮部分 */
+#products_list .dec {
+    position: relative;
+    right: 50px;
+}
+#products_list .dec:disabled, #products_list .inc:disabled {top: 5px !important}
+#products_list .num {
+    position: absolute;
+    top: 5px;
+    right: 38px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 33px;
+    font-size: 1.2rem;
+    color: #000;
+    border: 1px #C0C0C0 solid;
+    border-radius: 5px;
+    -webkit-box-shadow: 1px 1px 5px #DEDEDE inset;
+    -moz-box-shadow: 1px 1px 5px #DEDEDE inset;
+    box-shadow: 1px 1px 5px #DEDEDE inset;
+}
+
+#products_list .no_inventory {
+    color: #C7C7C7;
+    position: relative;
+    top: 10px;
+    display: block;
+    right: 29px;
+    font-size: 1.3rem;
+    padding: 2px 6px;
+    border: 1px solid #C7C7C7;
+    border-radius: 6px;
+}
+
+/* 购物车部分 */
+#cart_wrap {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+#cart {
+ /* margin: 2px 0 0 0; */
+    text-align: left;
+    opacity: .8;
+    color: #fff;
+    font-size: 1.5rem;
+    height: 24px;
+    line-height: 24px;
+    padding: 10px;
+    background: #2c2c2c;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.52);
+    position: relative;
+}
+
+#cart_num,#cart_total {margin-right: 8px;}
+#cart_num:after {content: '份'}
+#cart_total:after {content: '元'}
+
+#cart_botton {
+    color: #fff;
+    font-size: 1.5rem;
+    top: 0;
+    right: 0;
+    position: absolute;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
+    background-color: #727272;
+}
+
+#cart_botton.ok {
+    background-color: #F71B1B;
+}
